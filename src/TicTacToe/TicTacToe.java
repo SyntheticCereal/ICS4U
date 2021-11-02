@@ -43,8 +43,11 @@ public class TicTacToe {
 	JFrame frame;
 	int XX = -1;
 	int OO = 1;
-	int turn = 1;
+	int turn = XX;
 	boolean empty = true;
+	boolean xWin = false;
+	boolean oWin = false;
+	boolean tie = false;
 
 	public static void main(String[] args) {
 		new TicTacToe();
@@ -54,8 +57,8 @@ public class TicTacToe {
 		initGame();		
 		createAndShowGUI();
 
-		//		board[0][0] = XX;
-		//		board[0][1] = OO;
+//		board[0][0] = XX;
+//		board[1][0] = OO;
 	}
 
 	//This will reset the board if you want to play again.
@@ -92,7 +95,7 @@ public class TicTacToe {
 	void printBoard() {
 		for(int row=0; row<GRID; row++) {
 			for(int col=0; col<GRID; col++){
-				System.out.printf("%3d", board[row][col]);
+				System.out.printf("%3d", board[col][row]);
 			}
 			System.out.println();
 		}
@@ -144,21 +147,19 @@ public class TicTacToe {
 			g.setColor(Color.RED);
 			g2.setStroke(new BasicStroke(2));
 
-			for (int row=0; row<GRID; row++) {
-				for (int col=0; col<GRID; col++) {		
-					if (board[row][col] == XX) {
-						g.drawLine(col, col, row, col);
-						g.drawLine(col, col, row, col);
-					}
-					if (board[row][col] == OO) {
-						g.drawOval(col, col, row, col);
+			if (empty == true ) {
+				for (int x = 0; x<GRID; x++) {
+					for (int y = 0; y<GRID; y++) {
+						if (board[x][y]==XX) {
+							g.drawLine(boxW*x, boxH*y, boxW*(x+1), boxH*(y+1));
+							g.drawLine(boxW*x, boxH*(y+1), boxW*(x+1), boxH*y);
+						} else if (board[x][y] == OO){
+							g.drawOval(boxW*x, boxH*y, boxW, boxH);
+						}
 					}
 				}
 			}
-
-
 		}
-
 
 
 
@@ -166,17 +167,17 @@ public class TicTacToe {
 		//******************* MouseListener methods *****************//
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			int x = e.getX();
-			int y = e.getY();
+			int mx = e.getX();
+			int my = e.getY();
 
 
 			//calculate which square you clicked on
 			int col,row;
-			col = x/boxW ;
-			row = y/boxH ;
+			col = my/boxH;
+			row = mx/boxW ;
 
 			//TODO display mouse coords and grid square in title.
-			frame.setTitle(x + "," + y + "   " + row + "," + col);
+			frame.setTitle(mx + "," + my + "   " + row + "," + col);
 			//how to check if click right mouse button
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				//do something
@@ -195,23 +196,94 @@ public class TicTacToe {
 
 			//TODO update board
 			if (empty == true) {
-				if (turn%2==1) {
+				if (turn==XX) {
 					board[row][col] = XX;
 				}
-				else if (turn%2==0) {
+				else{
 					board[row][col] = OO;
 				}
 			}
 
 			//TODO check for the winner
+			int d1Count=0;
+			int d2Count=0;
+			int hCount=0;
+			int vCount=0;
+
+			for (int x = 0; x<GRID; x++) {
+				for (int y = 0; y<GRID; y++ ) {
+					vCount = vCount + board[x][y];
+					if (vCount == 3) {
+						oWin = true;
+					} else if (vCount == -3) {
+						xWin = true;
+					}
+					vCount=0;
+				}
+			}
+
+			for (int y = 0; y<GRID; y++) {
+				for (int x = 0; x<GRID; x++ ) {
+					hCount = hCount + board[x][y];
+					if (hCount == 3) {
+						oWin = true;
+					} else if (hCount == -3) {
+						xWin = true;
+					}
+					hCount=0;
+				}
+			}
+
+			for (int y = 0; y<GRID; y++) {
+				for (int x = 0; x<GRID; x++ ) {
+					d1Count = d1Count + board [x][y];
+					if (d1Count == 3) {
+						oWin = true;
+					} else if (d1Count == -3) {
+						xWin = true;
+					}
+					d1Count = 0;
+					d2Count = d2Count + board [x][y];
+					if (d2Count == 3) {
+						oWin = true;
+					} else if (d2Count == -3) {
+						xWin = true;
+					}
+					d2Count = 0;
+				}
+			}
+
+			if (xWin==true) {
+				frame.setTitle("X Wins!");
+			} else if (oWin ==true) {
+				frame.setTitle("O Wins!");
+			}
 
 			//TODO check for tie
+//			int emptyCount = 0;
+//			for (int y = 0; y<GRID; y++) {
+//				for (int x = 0; x<GRID; x++ ) {
+//					if (empty==true) {
+//						emptyCount++;
+//					}
+//				}
+//			}
+//
+//			if (emptyCount == GRID*GRID && xWin == false && oWin == false) {
+//				tie = true;
+//			}
+//			
+//			if (tie==true) {
+//				frame.setTitle("Cat's Game!");
+//			}
 
 			//TODO change turn
-			if (empty == true) {
-				turn++;
-				System.out.println();
+			if (turn==XX) {
+				turn=OO;
+			} else {
+				turn=XX;
 			}
+
 
 
 			this.repaint();
