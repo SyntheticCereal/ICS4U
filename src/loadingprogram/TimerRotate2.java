@@ -56,7 +56,9 @@ public class TimerRotate2 implements KeyListener{
 
 	//Other objects and variables
 	Line line = new Line(100.0, 100.0, 300.0, 300.0); 
-	Line line2 = new Line(200.0, 300.0, 500.0, 500.0); 
+	Line line2 = new Line(100.0, 300.0, 300.0, 100.0);
+	Line line3 = new Line(100.0, 300.0, 300.0, 100.0);
+	Line line4 = new Line(100.0, 300.0, 300.0, 100.0);
 
 	double angle = Math.toRadians(0.005);
 
@@ -135,6 +137,7 @@ public class TimerRotate2 implements KeyListener{
 			// exactly the same as in math, but here +y is down so the rotation goes in the opposite direction.
 			g2.rotate(angle, line.cx, line.cy);                       
 			line.paint(g2);
+			line2.paint(g2);
 			g2.drawOval(100, 100, 50, 50);
 			g2.drawOval(250, 250, 50, 50);
 			g2.rotate(-angle, line.cx, line.cy);

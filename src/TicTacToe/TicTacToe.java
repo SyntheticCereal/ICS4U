@@ -48,6 +48,11 @@ public class TicTacToe {
 	boolean xWin = false;
 	boolean oWin = false;
 	boolean tie = false;
+	int d1Count=0;
+	int d2Count=0;
+	int hCount=0;
+	int vCount=0;
+	int emptyCount = GRID*GRID;
 
 	public static void main(String[] args) {
 		new TicTacToe();
@@ -57,8 +62,8 @@ public class TicTacToe {
 		initGame();		
 		createAndShowGUI();
 
-//		board[0][0] = XX;
-//		board[1][0] = OO;
+		//		board[0][0] = XX;
+		//		board[1][0] = OO;
 	}
 
 	//This will reset the board if you want to play again.
@@ -147,15 +152,13 @@ public class TicTacToe {
 			g.setColor(Color.RED);
 			g2.setStroke(new BasicStroke(2));
 
-			if (empty == true ) {
-				for (int x = 0; x<GRID; x++) {
-					for (int y = 0; y<GRID; y++) {
-						if (board[x][y]==XX) {
-							g.drawLine(boxW*x, boxH*y, boxW*(x+1), boxH*(y+1));
-							g.drawLine(boxW*x, boxH*(y+1), boxW*(x+1), boxH*y);
-						} else if (board[x][y] == OO){
-							g.drawOval(boxW*x, boxH*y, boxW, boxH);
-						}
+			for (int x = 0; x<GRID; x++) {
+				for (int y = 0; y<GRID; y++) {
+					if (board[x][y]==XX) {
+						g.drawLine(boxW*x, boxH*y, boxW*(x+1), boxH*(y+1));
+						g.drawLine(boxW*x, boxH*(y+1), boxW*(x+1), boxH*y);
+					} else if (board[x][y] == OO){
+						g.drawOval(boxW*x, boxH*y, boxW, boxH);
 					}
 				}
 			}
@@ -192,6 +195,7 @@ public class TicTacToe {
 			} 
 			else {
 				empty = false;
+
 			}
 
 			//TODO update board
@@ -205,52 +209,52 @@ public class TicTacToe {
 			}
 
 			//TODO check for the winner
-			int d1Count=0;
-			int d2Count=0;
-			int hCount=0;
-			int vCount=0;
+
 
 			for (int x = 0; x<GRID; x++) {
 				for (int y = 0; y<GRID; y++ ) {
 					vCount = vCount + board[x][y];
-					if (vCount == 3) {
+					if (vCount == GRID) {
 						oWin = true;
-					} else if (vCount == -3) {
+					} else if (vCount == -GRID) {
 						xWin = true;
 					}
-					vCount=0;
+
 				}
+				vCount = 0;
 			}
 
 			for (int y = 0; y<GRID; y++) {
 				for (int x = 0; x<GRID; x++ ) {
 					hCount = hCount + board[x][y];
-					if (hCount == 3) {
+					if (hCount == GRID) {
 						oWin = true;
-					} else if (hCount == -3) {
+					} else if (hCount == -GRID) {
 						xWin = true;
 					}
-					hCount=0;
+
 				}
+				hCount=0;
 			}
 
 			for (int y = 0; y<GRID; y++) {
 				for (int x = 0; x<GRID; x++ ) {
 					d1Count = d1Count + board [x][y];
-					if (d1Count == 3) {
+					if (d1Count == GRID) {
 						oWin = true;
-					} else if (d1Count == -3) {
+					} else if (d1Count == -GRID) {
 						xWin = true;
 					}
 					d1Count = 0;
 					d2Count = d2Count + board [x][y];
-					if (d2Count == 3) {
+					if (d2Count == GRID) {
 						oWin = true;
-					} else if (d2Count == -3) {
+					} else if (d2Count == -GRID) {
 						xWin = true;
 					}
-					d2Count = 0;
+
 				}
+				d2Count = 0;
 			}
 
 			if (xWin==true) {
@@ -260,22 +264,17 @@ public class TicTacToe {
 			}
 
 			//TODO check for tie
-//			int emptyCount = 0;
-//			for (int y = 0; y<GRID; y++) {
-//				for (int x = 0; x<GRID; x++ ) {
-//					if (empty==true) {
-//						emptyCount++;
-//					}
-//				}
-//			}
-//
-//			if (emptyCount == GRID*GRID && xWin == false && oWin == false) {
-//				tie = true;
-//			}
-//			
-//			if (tie==true) {
-//				frame.setTitle("Cat's Game!");
-//			}
+			if (empty==true) {
+				emptyCount--;
+			}
+
+			if (emptyCount == 0 && xWin == false && oWin == false) {
+				tie = true;
+			}
+
+			if (tie==true) {
+				frame.setTitle("Cat's Game!");
+			}
 
 			//TODO change turn
 			if (turn==XX) {
@@ -283,8 +282,6 @@ public class TicTacToe {
 			} else {
 				turn=XX;
 			}
-
-
 
 			this.repaint();
 			printBoard();
