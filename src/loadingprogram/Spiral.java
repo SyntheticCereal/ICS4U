@@ -42,15 +42,16 @@ public class Spiral extends JPanel  {
 	private Color c2 = new Color(247, 205, 255);
 	private double angle = 0.0;
 	private double r = 0.0;
-	private static int panW = 1000;
-	private static int panH = 1000;
+	private static int panW = 500;
+	private static int panH = 500;
 	private int cx,cy;
 	BufferedImage img;
 	static String fpath="";
 	static String fname="Spiral1.png";
 	int j=0;
+	Line line = new Line(250.0, 250.0, 250.0, 250.0); 
+	int time=0;
 	
-
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Spiral");		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,8 +71,9 @@ public class Spiral extends JPanel  {
 		this.setPreferredSize(new Dimension(panW, panH));
 
 		timer = new Timer(1, new Timer1());
-		timer.setInitialDelay(100);
+		timer.setInitialDelay(0);
 		timer.start();
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -84,6 +86,7 @@ public class Spiral extends JPanel  {
 		private boolean reverse = false;
 		public void actionPerformed(ActionEvent e) {
 
+			time++;
 			//get the graphics object from the image so that we can draw on it.
 			Graphics2D g2 = img.createGraphics();
 
@@ -94,21 +97,21 @@ public class Spiral extends JPanel  {
 			
 			Color c4 = new Color((j*32)%256,((j+1)*32)%256,((j+2)*32%256));
 			g2.setColor(c4);
-//			g2.setXORMode (Color.BLACK);
+			g2.setXORMode (Color.BLACK);
 
 			//SPEED\\
 			//for (int i = 0; i < 100; i++) {
 
 			if (!reverse) {
 				r += 0.15;
-				angle += 0.5;
+				angle += 0.15;
 			}
 			else {
 				r -= 0.15; 
-				angle -= 0.5;
+				angle -= 0.15;
 			}
 
-			if (r > 150) {	
+			if (r > 100) {	
 				reverse = true;
 				cx++;
 			}
@@ -130,33 +133,33 @@ public class Spiral extends JPanel  {
 			
 			
 			
-			
-			
+//			g2.rotate(angle, line.cx, line.cy);  
+			if (time%10==0){
 			if (reverse==true) {
-				g2.setColor(c);
+				g2.setColor(Color.WHITE);
 				g2.setStroke(new BasicStroke(5));
-				g2.fillOval(x,y, 20, 20);
+				g2.fillOval(x,y, 50, 50);
 				j++;
 			} else {
-				g2.setStroke(new BasicStroke(5));
-				g2.setColor(c4);
-				g2.fillOval(x,y, 10,10);
+				g2.setStroke(new BasicStroke(10));
+				g2.setColor(Color.WHITE);
+				g2.fillOval(x,y, 50,50);
 				j++;
 			}
+		}
+//			g2.rotate(-angle, line.cx, line.cy);
 
 
 			//SPEED\\
 			// }
 			//--- end of drawing code ---
-
 			repaint(); // to speed things up, don't repaint every single timer tick. Swing coalesces a number of repaints into one
-
 //			saveTimer(); //decide when to save the image and quit
 		}
 
 
 		//Determine when to save the image and quit
-		final static int ENDTIME = 30; //seconds
+//		final static int ENDTIME = 30; //seconds
 //		private long lastTime = System.currentTimeMillis();
 
 //		void saveTimer() {
