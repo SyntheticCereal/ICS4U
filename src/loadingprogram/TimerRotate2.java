@@ -161,7 +161,7 @@ public class TimerRotate2 implements KeyListener{
 
 			g.drawString("TIME1=" + time*t_speed, 50,50);
 
-			g2.dispose(); //only dispose of graphics objects that you have created
+//			g2.dispose(); //only dispose of graphics objects that you have created
 		}
 	}
 

@@ -67,7 +67,7 @@ public class Spiral extends JPanel  {
 		cx = panW/2;
 		cy = panH/2;
 		img = new BufferedImage(panW,panH, BufferedImage.TYPE_INT_RGB);
-		this.setBackground(Color.WHITE);	//the JPanel has a white background, but you'll never see it ...
+		this.setBackground(Color.BLUE);	//the JPanel has a white background, but you'll never see it ...
 		this.setPreferredSize(new Dimension(panW, panH));
 
 		timer = new Timer(1, new Timer1());
@@ -97,18 +97,18 @@ public class Spiral extends JPanel  {
 			
 			Color c4 = new Color((j*32)%256,((j+1)*32)%256,((j+2)*32%256));
 			g2.setColor(c4);
-			g2.setXORMode (Color.BLACK);
+//			g2.setXORMode (Color.c4);
 
 			//SPEED\\
 			//for (int i = 0; i < 100; i++) {
-
+	
 			if (!reverse) {
-				r += 0.15;
-				angle += 0.15;
+				r += 1.5;
+				angle += 3.03;
 			}
 			else {
-				r -= 0.15; 
-				angle -= 0.15;
+				r -= 1.5; 
+				angle -= 3.03;
 			}
 
 			if (r > 100) {	
@@ -123,30 +123,24 @@ public class Spiral extends JPanel  {
 
 			x = (int) (cx + r*Math.cos(angle));
 			y = (int) (cy + r*Math.sin(angle));
-
-
-//			int R = (int) (Math.random( )*256);
-//			int G = (int)(Math.random( )*256);
-//			int B= (int)(Math.random( )*256);
-//			Color randomColor = new Color(247, 205, 255);
-//			g2.setColor(randomColor);
-			
 			
 			
 //			g2.rotate(angle, line.cx, line.cy);  
-			if (time%10==0){
+//			if (time%10==0){
 			if (reverse==true) {
 				g2.setColor(Color.WHITE);
 				g2.setStroke(new BasicStroke(5));
-				g2.fillOval(x,y, 50, 50);
+				g2.fillOval(x,y, 30, 30);
 				j++;
 			} else {
 				g2.setStroke(new BasicStroke(10));
-				g2.setColor(Color.WHITE);
-				g2.fillOval(x,y, 50,50);
+				g2.setColor(Color.BLACK);
+				g2.fillOval(x,y, 25,25);
 				j++;
 			}
-		}
+			
+//		}
+			
 //			g2.rotate(-angle, line.cx, line.cy);
 
 
@@ -154,6 +148,10 @@ public class Spiral extends JPanel  {
 			// }
 			//--- end of drawing code ---
 			repaint(); // to speed things up, don't repaint every single timer tick. Swing coalesces a number of repaints into one
+			
+			g2.setColor(Color.BLACK);
+			g2.fillOval(x,y, 25,25);
+			repaint();
 //			saveTimer(); //decide when to save the image and quit
 		}
 
