@@ -28,6 +28,4 @@ public class ArrayMap {
 		//		for (int i = 0; i < SIZE*3 +2; i++) System.out.print("=");System.out.println();		
 	}
 
-
-
 }
