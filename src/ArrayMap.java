@@ -1,7 +1,7 @@
 
 public class ArrayMap {
 
-	private static final int SIZE = 100;
+	private static final int SIZE = 10;
 	private static int[][] map = new int[SIZE][SIZE];
 
 	public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class ArrayMap {
 			for(int col=0; col<SIZE; col++){
 				if (col == 0 || col == SIZE-1 || row == 0 || row == SIZE-1)
 				{
-					System.out.printf("%3d", SIZE);
+					System.out.printf("%3d", 10);
 				} else if (row == 8 && col == 2) {
 					System.out.printf("%3d", 99);
 				}else {
