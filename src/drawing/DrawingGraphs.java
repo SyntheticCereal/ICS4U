@@ -1,9 +1,7 @@
 package drawing;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -11,15 +9,18 @@ import java.awt.RenderingHints;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class FirstDrawing {
+import drawing.FirstDrawing.DrawingPanel;
+
+public class DrawingGraphs {
 
 	public static void main(String[] args) {
 		new FirstDrawing();
 	}
 
 	int panW = 800, panH = 800;
+	double 
 	
-	FirstDrawing(){
+	 DrawingGraphs(){
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -51,4 +52,5 @@ public class FirstDrawing {
 			
 		}
 	}
+
 }

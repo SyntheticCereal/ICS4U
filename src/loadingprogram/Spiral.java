@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,7 @@ import javax.swing.Timer;
  *      the flickering that happens when you only use paintComponent. I haven't tried this yet.
  * (iii) you can also do drawing a lot faster. See comments marked //SPEED\\ 
  */
-public class Spiral extends JPanel  {
+public class Spiral extends JPanel{
 	Timer timer;
 
 	private int x,y; 
@@ -49,7 +50,7 @@ public class Spiral extends JPanel  {
 	static String fpath="";
 	static String fname="Spiral1.png";
 	int j=0;
-	Line line = new Line(250.0, 250.0, 250.0, 250.0); 
+	int pressCount = 0;
 	int time=0;
 	
 	public static void main(String[] args) {
@@ -181,5 +182,6 @@ public class Spiral extends JPanel  {
 		}
 		System.out.println("done");
 	}
+
 }
 

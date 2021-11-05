@@ -10,44 +10,38 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Spiral2 extends JPanel  {
+public class LoadingIcon extends JPanel{
 	Timer timer;
 
 	private double x,y; 
 	private Color c = Color.BLACK;
 	private double angle = 0.0;
 	private double r = 0.0;
-	private static int panW = 1000;
-	private static int panH = 1000;
+	private static int panW = 700;
+	private static int panH = 700;
 	final private int cx,cy;
 	private static JFrame frame;
 	BufferedImage img;
 	int j=0;
-
+	int cc =1;
 
 	public static void main(String[] args) {
 		frame = new JFrame("Spiral");		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);		
-		Spiral2 panel = new Spiral2();		
+		LoadingIcon panel = new LoadingIcon();		
 		frame.add(panel); //somehow it paints more smoothly if this is added before setVisible.
 		frame.pack();		
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);		
 	}
 
-	Spiral2() {
+	LoadingIcon() {
 		cx = panW/2;
 		cy = panH/2;
 		img = new BufferedImage(panW,panH, BufferedImage.TYPE_INT_RGB);
@@ -75,25 +69,26 @@ public class Spiral2 extends JPanel  {
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 			// --- Do all drawing here ---
-			Random rand = new Random();
-			float R = rand.nextFloat();
-			float G = rand.nextFloat();
-			float B = rand.nextFloat();
-			Color c4 = new Color(R, G, B);
+			int R = (int)(Math.random()*255);
+			int G = (int)(Math.random()*255);
+			int B = (int)(Math.random()*255);
 
-			Color c2 = new Color((j*32)%256,50,((j+1)*32)%256);
-
+			Color c2 = new Color(R, G, B); 
+			Color c4 = new Color((j*32)%256,((j+1)*32)%256,((j+2)*32%256));
 			Color c3 = new Color(0,j*100%256,j*50%256);
+			Color c5 = new Color((j*32)%256,((j+1)*32)%256,((j+1)*32)%256);
+			Color c6 = new Color((j*32)%256,(j*32)%256,(j*32)%256);
+
 
 			g2.setStroke(new BasicStroke(5));
 
 			if (!reverse) {
 				r += 0.15;
-				angle += 0.5;
+				angle += 0.5*cc;
 			}
 			else {
 				r -= 0.15; 
-				angle -= 0.5;
+				angle -= 0.5*cc;
 			}
 
 			if (r > 150) {	
@@ -102,8 +97,10 @@ public class Spiral2 extends JPanel  {
 			}
 			if (r < 0.0) {
 				reverse = false;				
+				cc*=-1;
 				r = 0.0;
-				j=0;;
+				j=0;
+
 			}			
 
 			x = (cx + r*Math.cos(angle));
@@ -115,18 +112,22 @@ public class Spiral2 extends JPanel  {
 				g2.setColor(c);
 				g2.fillOval((int)x-1,(int)y-1, 15, 15);
 				j++;
-			} else { //Draws colored ovals
-				g2.setColor(c3);
+			} else { //Draws colored ovals}
+				g2.setColor(c6);
 				g2.fillOval((int)x,(int)y, 10,10);
 				j++;
 			}
-			frame.setTitle(j  + " " );
+
 
 			repaint(); // to speed things up, don't repaint every single timer tick. Swing coalesces a number of repaints into one
 		}
+
+		
 	}
-
-
-
 }
+
+
+
+
+
 
