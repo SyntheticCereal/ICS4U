@@ -14,35 +14,40 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/*
+ * Chris Simpauco
+ * Spiral Loading Icon
+ * Creates a spiral of different colored ovals and then covers them with black ovals
+ */
 
-
-public class LoadingIcon extends JPanel{
+public class LoadingIcon2 extends JPanel{
+	
 	Timer timer;
-
 	private double x,y; 
 	private Color c = Color.BLACK;
 	private double angle = 0.0;
 	private double r = 0.0;
 	private static int panW = 700;
 	private static int panH = 700;
-	final private int cx=panW/2, cy=panH/2;
+	final private int cx,cy;
 	private static JFrame frame;
 	BufferedImage img;
 	int j=0;
 	int cc =1;
-	Oval oval = new Oval (x, y, r, angle, cx, cy);
 
 	public static void main(String[] args) {
 		frame = new JFrame("Spiral");		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		LoadingIcon panel = new LoadingIcon();		
-		frame.add(panel); //somehow it paints more smoothly if this is added before setVisible.
+		LoadingIcon2 panel = new LoadingIcon2();		
+		frame.add(panel);
 		frame.pack();		
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);		
 	}
 
-	LoadingIcon() {
+	LoadingIcon2() {
+		cx = panW/2;
+		cy = panH/2;
 		img = new BufferedImage(panW,panH, BufferedImage.TYPE_INT_RGB);
 		this.setBackground(Color.WHITE);	//the JPanel has a white background, but you'll never see it ...
 		this.setPreferredSize(new Dimension(panW, panH));
@@ -65,67 +70,65 @@ public class LoadingIcon extends JPanel{
 			//get the graphics object from the image so that we can draw on it.
 			Graphics2D g2 = img.createGraphics();
 
+			//Enables AntiAliasing
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			// --- Do all drawing here ---
-
-			//Generates random RGB values
+			//Creates random values for RGB
 			int R = (int)(Math.random()*255);
 			int G = (int)(Math.random()*255);
 			int B = (int)(Math.random()*255);
 
-			Color c2 = new Color(R, G, B); //Random Numbers
+			Color c2 = new Color(R, G, B); //Random colours
 			Color c3 = new Color(0,j*100%256,j*50%256); //Green and blue
 			Color c4 = new Color((j*32)%256,((j+1)*32)%256,((j+2)*32%256)); //Green, red and blue
-			Color c5 = new Color((j*32)%256,((j+1)*32)%256,((j+1)*32)%256); //Red and Greyish Blue
+			Color c5 = new Color((j*32)%256,((j+1)*32)%256,((j+1)*32)%256); //Red and grey blue
 			Color c6 = new Color((j*32)%256,(j*32)%256,(j*32)%256); //Monochrome
-			
+
+
 			g2.setStroke(new BasicStroke(5));
 
-			//Makes circles draw in a spiral
-//			if (!reverse) {
-//				r += 0.15;
-//				angle += 0.5*cc;
-//			}
-//			else {
-//				r -= 0.15; 
-//				angle -= 0.5*cc;
-//			}
-//
-//			if (r > 150) {	
-//				reverse = true;
-//				j=0;;
-//			}
-//			if (r < 0.0) {
-//				reverse = false;				
-//				cc*=-1;
-//				r = 0.0;
-//				j=0;
-//
-//			}			
+			//Calculates the spiral
+			if (!reverse) {
+				r += 0.15;
+				angle += 0.5*cc;
+			}
+			else {
+				r -= 0.15; 
+				angle -= 0.5*cc;
+			}
 
-			//Calculate where the ovals are drawn
-//			x = (cx + r*Math.cos(angle));
-//			y = (cy + r*Math.sin(angle));
+			if (r > 150) {	
+				reverse = true;
+				j=0;;
+			}
+			if (r < 0.0) {
+				reverse = false;				
+				cc*=-1;
+				r = 0.0;
+				j=0;
+
+			}			
+			
+			//Calculates where to draw circle
+			x = (cx + r*Math.cos(angle));
+			y = (cy + r*Math.sin(angle));
 
 
 
 			if (reverse) { //Draws black ovals
 				g2.setColor(c);
-				oval.DrawReverseOval(g2);
+				g2.fillOval((int)x-1,(int)y-1, 15, 15);
 				j++;
-			} else { //Draws colored ovals
+			} else { //Draws colored ovals}
 				g2.setColor(c3);
-				oval.DrawOval(g2);
+				g2.fillOval((int)x,(int)y, 10, 10);
 				j++;
 			}
+
+
 			repaint(); // to speed things up, don't repaint every single timer tick. Swing coalesces a number of repaints into one
 		}
+
+
 	}
 }
-
-
-
-
-
-
