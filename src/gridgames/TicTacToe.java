@@ -39,20 +39,20 @@ public class TicTacToe {
 	final static Color COLOURBACK = new Color(240, 240, 240);
 
 	//GLOBAL VARIABLES
-	int board[][] = new int [GRID][GRID]; 
-	JFrame frame;
-	int XX = -1;
-	int OO = 1;
-	int turn = XX;
-	boolean empty = true;
-	boolean xWin = false;
-	boolean oWin = false;
-	boolean tie = false;
-	int d1Count=0;
-	int d2Count=0;
-	int hCount=0;
-	int vCount=0;
-	int emptyCount = GRID*GRID;
+	static int board[][] = new int [GRID][GRID]; 
+	static JFrame frame;
+	static int XX = -1;
+	static int OO = 1;
+	static int turn = XX;
+	static boolean empty = true;
+	static boolean xWin = false;
+	static boolean oWin = false;
+	static boolean tie = false;
+	static int d1Count=0;
+	static int d2Count=0;
+	static int hCount=0;
+	static int vCount=0;
+	static int emptyCount = GRID*GRID;
 
 	public static void main(String[] args) {
 		new TicTacToe();
@@ -210,7 +210,7 @@ public class TicTacToe {
 
 			//TODO check for the winner
 
-
+			//Checks for vertical win
 			for (int x = 0; x<GRID; x++) {
 				for (int y = 0; y<GRID; y++ ) {
 					vCount = vCount + board[x][y];
@@ -224,6 +224,7 @@ public class TicTacToe {
 				vCount = 0;
 			}
 
+			//Checks for horizontal win
 			for (int y = 0; y<GRID; y++) {
 				for (int x = 0; x<GRID; x++ ) {
 					hCount = hCount + board[x][y];
@@ -236,27 +237,26 @@ public class TicTacToe {
 				}
 				hCount=0;
 			}
-
-			for (int y = 0; y<GRID; y++) {
-				for (int x = 0; x<GRID; x++ ) {
-					d1Count = d1Count + board [x][y];
-					if (d1Count == GRID) {
-						oWin = true;
-					} else if (d1Count == -GRID) {
-						xWin = true;
-					}
-					d1Count = 0;
-					d2Count = d2Count + board [x][y];
-					if (d2Count == GRID) {
-						oWin = true;
-					} else if (d2Count == -GRID) {
-						xWin = true;
-					}
-
-				}
-				d2Count = 0;
-			}
-
+			
+			//Checks for diagonal wins
+			d1Count = d1Count + board[0][0] + board[1][1] + board[2][2];
+			d2Count = d2Count + + board[2][0] + board[0][2] + board[1][1];
+			
+			//win for [0][0] to [2][2]
+			if (d1Count == GRID) {
+				oWin = true;
+			} else if (d1Count == -GRID) {
+				xWin = true;
+			} else d1Count = 0;
+			
+			//win for [2][0] to [0][2]
+			if (d2Count == GRID) {
+				oWin = true;
+			} else if (d2Count == -GRID) {
+				xWin = true;
+			} else d2Count = 0;
+			
+			//Displays win
 			if (xWin==true) {
 				frame.setTitle("X Wins!");
 			} else if (oWin ==true) {
@@ -297,5 +297,6 @@ public class TicTacToe {
 		public void mouseExited(MouseEvent e) {}
 
 	} //end of DrawingPanel class
+
 
 }

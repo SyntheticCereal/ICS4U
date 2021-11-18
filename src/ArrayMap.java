@@ -7,6 +7,7 @@ public class ArrayMap {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		printBoard();
+		
 	}
 
 	static void printBoard() {
@@ -14,14 +15,13 @@ public class ArrayMap {
 			for(int col=0; col<SIZE; col++){
 				if (col == 0 || col == SIZE-1 || row == 0 || row == SIZE-1)
 				{
-					System.out.printf("%3d", 10);
-				} else if (row == 8 && col == 2) {
-					System.out.printf("%3d", 99);
-				}else {
-					System.out.printf("%3d", map[row][col]);
+					map[row][col] = 10;
+				} else {
+					map[row][col] = 0;
 				}
+				map[8][2] = 99;
+				System.out.printf("%3d", map[row][col]);
 			}
-			
 			System.out.println();
 		}
 		//System.out.println("=========="); //print out dividing line of the correct length
