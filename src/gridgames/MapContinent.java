@@ -32,6 +32,7 @@ public class MapContinent
 
 	//global variables
 	int[][] board = new int[GRID][GRID];
+	boolean adjEmpty = false;
 
 	MapContinent() {	//constructor
 		initGame();
@@ -63,8 +64,8 @@ public class MapContinent
 			for (i = 0;  i < GRID; i++) {
 				random = (int)(Math.random()*100);
 				if (random % 2 == 0) {
-				board[i][j] = LAND;
-				landTiles++;
+					board[i][j] = LAND;
+					landTiles++;
 				}
 				if (landTiles == NUM_LAND) {
 					done = true;
@@ -78,11 +79,22 @@ public class MapContinent
 	//           of a lake touches the edge of the board it becomes an ocean.	
 	void findLakes(int x, int y) {
 		//call subroutine to colour in all contiguous lake squares
+		int row;
+		int col;
 
 		if (board[x][y] == EMPTY) {
 			board[x][y] = LAKE;
-			if (board[x-1][y] == EMPTY) {
+			if (board[x-1][y] == EMPTY && x-1 >= 0 ) {
 				board[x-1][y] = LAKE;
+			}
+			if (board[x][y-1] == EMPTY && y-1 >=0) {
+				board[x][y-1] = LAKE;
+			}
+			if (board[x+1][y] == EMPTY && x+1 < GRID) {
+				board[x+1][y] = LAKE;
+			}
+			if (board[x][y+1] == EMPTY && y+1 < GRID) {
+				board[x][y+1] = LAKE;
 			}
 		}
 
