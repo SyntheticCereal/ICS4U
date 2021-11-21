@@ -32,6 +32,7 @@ public class MapContinent
 
 	//global variables
 	int[][] board = new int[GRID][GRID];
+	boolean adjEmpty = false;
 
 	MapContinent() {	//constructor
 		initGame();
@@ -54,13 +55,23 @@ public class MapContinent
 
 	void makeRandomMap() {
 		int i,j;
+		int random;
 		i=j=0;
 		boolean done = false;
 		int landTiles = 0;
 		//PROBLEM 1: Make an equal number of land and water squares, but make sure that the land is randomly distributed.
-		board[i][j] = LAND;
-
-
+		for (j = 0;  j < GRID; j++) {
+			for (i = 0;  i < GRID; i++) {
+				random = (int)(Math.random()*100);
+				if (random % 2 == 0) {
+					board[i][j] = LAND;
+					landTiles++;
+				}
+				if (landTiles == NUM_LAND) {
+					done = true;
+				}
+			}
+		}
 	}
 
 	//PROBLEM 2: Fix the function "findLakes()" so that it colours all empty squares that are adjacent to this one.
@@ -68,12 +79,29 @@ public class MapContinent
 	//           of a lake touches the edge of the board it becomes an ocean.	
 	void findLakes(int x, int y) {
 		//call subroutine to colour in all contiguous lake squares
+		int row;
+		int col;
 
-		if (board[x][y] == EMPTY) board[x][y] = LAKE;
+		if (board[x][y] == EMPTY) {
+			board[x][y] = LAKE;
+			if (board[x-1][y] == EMPTY && x-1 >= 0 ) {
+				board[x-1][y] = LAKE;
+			}
+			if (board[x][y-1] == EMPTY && y-1 >=0) {
+				board[x][y-1] = LAKE;
+			}
+			if (board[x+1][y] == EMPTY && x+1 < GRID) {
+				board[x+1][y] = LAKE;
+			}
+			if (board[x][y+1] == EMPTY && y+1 < GRID) {
+				board[x][y+1] = LAKE;
+			}
+		}
+
 		/*
-		
+
 		if (... square is on the edge of the board) findOceans(x,y);  
-		 
+
 		 */
 	}
 
