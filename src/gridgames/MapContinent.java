@@ -33,7 +33,10 @@ public class MapContinent
 	//global variables
 	int[][] board = new int[GRID][GRID];
 	boolean adjEmpty = false;
-
+	int h = (int)(Math.random()*GRID-1);
+	int v = (int)(Math.random()*GRID-1);
+	int landTiles = 0;
+	
 	MapContinent() {	//constructor
 		initGame();
 		createAndShowGUI();
@@ -48,8 +51,9 @@ public class MapContinent
 				board[i][j]=EMPTY;
 			}
 		}
-		makeRandomMap();
-		// makeContinents();	//this doesn't exist yet. It is for Problem#4.
+		//				makeRandomMap();
+		makeContinentsNE(h, v);	//this doesn't exist yet. It is for Problem#4.
+		makeContinentsSW(h, v);
 	}
 
 	void makeRandomMap() {
@@ -57,12 +61,11 @@ public class MapContinent
 		int random;
 		i=j=0;
 		boolean done = false;
-		int landTiles = 0;
 		//PROBLEM 1: Make an equal number of land and water squares, but make sure that the land is randomly distributed.
 		for (j = 0;  j < GRID; j++) {
 			for (i = 0;  i < GRID; i++) {
 				random = (int)(Math.random()*100);
-				if (random % 2 == 0) {
+				if (random > 50) {
 					board[i][j] = LAND;
 					landTiles++;
 				}
@@ -72,6 +75,76 @@ public class MapContinent
 			}
 		}
 	}
+
+	void makeContinentsNE(int h, int v) {
+		
+		//		int nmbrContinents = (int)(Math.random()*5);
+		//		for (int k = 0; k < nmbrContinents; k++) { 
+
+
+
+//		if (h+1 < GRID) {
+//			board[h+1][v] = LAND;
+//			if(50<(int)(Math.random()*100)) {
+//				makeContinents(h+1, v);
+//			}
+//		}
+//
+//		if (v-1 >= 0) {
+//			board[h][v-1] = LAND;
+//			if(50<(int)(Math.random()*100)) {
+//				makeContinents(h, v-1);
+//			}
+//		}
+
+		if (h-1 >= 0) {
+			board[h-1][v] = LAND;
+			landTiles++;
+			if(50<(int)(Math.random()*100)) {
+				makeContinentsNE(h-1, v);
+			}
+		}
+
+		if (v+1 <v+5) {
+			board[h][v+1] = LAND;
+			landTiles++;
+			if(50<(int)(Math.random()*100)) {
+				makeContinentsNE(h, v+1);
+			}
+		}
+		
+//		if (landTiles < NUM_LAND) {
+//			h = (int)(Math.random()*GRID);
+//			v = (int)(Math.random()*GRID);
+//			
+//			makeContinents(h, v);
+//		}
+		
+
+	}
+	
+	void makeContinentsSW(int h, int v) {
+		
+		//		int nmbrContinents = (int)(Math.random()*5);
+		//		for (int k = 0; k < nmbrContinents; k++) { 
+
+
+
+		if (h+1 < GRID) {
+			board[h+1][v] = LAND;
+			if(50<(int)(Math.random()*100)) {
+				makeContinentsSW(h+1, v);
+			}
+		}
+
+		if (v-1 >= 0) {
+			board[h][v-1] = LAND;
+			if(50<(int)(Math.random()*100)) {
+				makeContinentsSW(h, v-1);
+			}
+		}
+	}	
+	
 
 	//PROBLEM 2: Fix the function "findLakes()" so that it colours all empty squares that are adjacent to this one.
 	//PROBLEM 3: Once you have solved problem 2, now set things up so that if any part 
@@ -126,28 +199,28 @@ public class MapContinent
 		}
 
 		if (x+1 < GRID) {
-			if (board[x+1][y] == LAKE){
+			if (board[x+1][y] == LAKE || board[x+1][y] == EMPTY){
 				board[x+1][y] = OCEAN;
 				findOceans(x+1, y);
 			}
 		}
 
 		if ( x-1 >= 0) {
-			if (board[x-1][y] == LAKE){
+			if (board[x-1][y] == LAKE || board[x-1][y] == EMPTY){
 				board[x-1][y] = OCEAN;
 				findOceans(x-1, y);
 			}
 		}
 
 		if ( y+1 < GRID) {
-			if (board[x][y+1] == LAKE ){
+			if (board[x][y+1] == LAKE || board[x][y+1] == EMPTY){
 				board[x][y+1] = OCEAN;
 				findOceans(x, y+1);
 			}
 		}
 
 		if ( y-1 >= 0) {
-			if (board[x][y-1] == LAKE){
+			if (board[x][y-1] == LAKE || board[x][y-1] == EMPTY){
 				board[x][y-1] = OCEAN;
 				findOceans(x, y-1);
 			}

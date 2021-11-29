@@ -1,3 +1,5 @@
+package misc_files;
+
 public class SplittingDigits {
 	public static void main (String[] args) {
 		

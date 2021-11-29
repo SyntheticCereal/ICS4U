@@ -1,3 +1,4 @@
+package misc_files;
 
 class FactoryExample{
 	public static void main(String[] args) {
