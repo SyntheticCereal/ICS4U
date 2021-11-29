@@ -48,7 +48,6 @@ public class MapContinent
 				board[i][j]=EMPTY;
 			}
 		}
-
 		makeRandomMap();
 		// makeContinents();	//this doesn't exist yet. It is for Problem#4.
 	}
@@ -79,30 +78,80 @@ public class MapContinent
 	//           of a lake touches the edge of the board it becomes an ocean.	
 	void findLakes(int x, int y) {
 		//call subroutine to colour in all contiguous lake squares
-		int row;
-		int col;
+
 
 		if (board[x][y] == EMPTY) {
-			board[x][y] = LAKE;
-			if (board[x-1][y] == EMPTY && x-1 >= 0 ) {
-				board[x-1][y] = LAKE;
-			}
-			if (board[x][y-1] == EMPTY && y-1 >=0) {
-				board[x][y-1] = LAKE;
-			}
-			if (board[x+1][y] == EMPTY && x+1 < GRID) {
+			board [x][y]  = LAKE;
+		}
+
+		if (x+1 < GRID) {
+			if (board[x+1][y] == EMPTY){
 				board[x+1][y] = LAKE;
+				findLakes(x+1, y);
 			}
-			if (board[x][y+1] == EMPTY && y+1 < GRID) {
-				board[x][y+1] = LAKE;
+		}
+		if (x-1 >= 0) {
+			if (board[x-1][y] == EMPTY){
+				board[x-1][y] = LAKE;
+				findLakes(x-1, y);
 			}
 		}
 
-		/*
+		if (y+1 < GRID) {
+			if (board[x][y+1] == EMPTY){ 
 
-		if (... square is on the edge of the board) findOceans(x,y);  
+				board[x][y+1] = LAKE;
+				findLakes(x, y+1);
+			}
+		}
 
-		 */
+		if (y-1 >= 0) {
+			if (board[x][y-1] == EMPTY){
+				board[x][y-1] = LAKE;
+				findLakes(x, y-1);
+			}
+		}
+
+		if (x == 0 || y == 0) {
+			findOceans(x,y);
+		}
+		if (y == GRID-1 || x == GRID-1) {
+			findOceans(x,y);
+		}
+
+	}
+	void findOceans(int x, int y) {
+		if (board[x][y] == LAKE) {
+			board [x][y]  = OCEAN;
+		}
+
+		if (x+1 < GRID) {
+			if (board[x+1][y] == LAKE){
+				board[x+1][y] = OCEAN;
+				findOceans(x+1, y);
+			}
+		}
+
+		if ( x-1 >= 0) {
+			if (board[x-1][y] == LAKE){
+				board[x-1][y] = OCEAN;
+				findOceans(x-1, y);
+			}
+		}
+
+		if ( y+1 < GRID) {
+			if (board[x][y+1] == LAKE ){
+				board[x][y+1] = OCEAN;
+				findOceans(x, y+1);
+			}
+		}
+
+		if ( y-1 >= 0) {
+			if (board[x][y-1] == LAKE){
+				board[x][y-1] = OCEAN;
+				findOceans(x, y-1);
+			}
+		}
 	}
 
 
