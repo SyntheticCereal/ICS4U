@@ -64,8 +64,6 @@ public class TicTacToe {
 		initGame();		
 		createAndShowGUI();
 
-		//		board[0][0] = XX;
-		//		board[1][0] = OO;
 	}
 
 	//This will reset the board if you want to play again.
@@ -99,16 +97,16 @@ public class TicTacToe {
 
 	}
 
-	void printBoard() {
-		for(int row=0; row<GRID; row++) {
-			for(int col=0; col<GRID; col++){
-				System.out.printf("%3d", board[col][row]);
-			}
-			System.out.println();
-		}
-		//System.out.println("=========="); //print out dividing line of the correct length
-		for (int i = 0; i < GRID*3 +2; i++) System.out.print("=");System.out.println();		
-	}
+//	void printBoard() {
+//		for(int row=0; row<GRID; row++) {
+//			for(int col=0; col<GRID; col++){
+//				System.out.printf("%3d", board[col][row]);
+//			}
+//			System.out.println();
+//		}
+//		//System.out.println("=========="); //print out dividing line of the correct length
+//		for (int i = 0; i < GRID*3 +2; i++) System.out.print("=");System.out.println();		
+//	}
 
 	private class DrawingPanel extends JPanel implements MouseListener{
 
@@ -128,7 +126,6 @@ public class TicTacToe {
 			jpanW = this.getSize().width;		
 			jpanH = this.getSize().height;	
 
-			//TODO Find the size of each box in pixels.  Set boxW, boxH
 			boxW = jpanW/GRID;
 			boxH = jpanH/GRID;
 
@@ -141,14 +138,12 @@ public class TicTacToe {
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			initGraphics(); //needed if the window is resized.
 
-			//TODO Draw grid
 			g.setColor(COLOURGRID);	
 			for (int i = 1; i<GRID; i++) {
 				g.drawLine(boxW*i, 0, boxW*i, jpanH); //Vertical
 				g.drawLine(0, boxH*i, jpanW, boxH*i); //Horizontal
 			}
 
-			//TODO draw all X and Os
 			//Check every square in board[][] and draw an X or O there.
 			//Try and resize the window while playing. Everything works. 
 			g.setColor(Color.RED);
@@ -179,8 +174,6 @@ public class TicTacToe {
 			col = my/boxH;
 			row = mx/boxW ;
 
-			//TODO display mouse coords and grid square in title.
-			frame.setTitle(mx + "," + my + "   " + row + "," + col);
 			//how to check if click right mouse button
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				for (int i = 0; i<GRID; i++) {
@@ -199,7 +192,7 @@ public class TicTacToe {
 			}
 			
 			this.repaint();
-			printBoard(); 
+//			printBoard(); 
 		}	
 
 		@Override
@@ -215,7 +208,7 @@ public class TicTacToe {
 
 	public void Gameplay() {
 
-		//TODO Check if the square is empty
+		//Check if the square is empty
 		if (xWin == true || oWin == true) {
 			empty = false;
 		} else if (board[row][col] == 0) {
@@ -224,7 +217,7 @@ public class TicTacToe {
 			empty = false;
 		}
 
-		//TODO update board
+		//update board
 		if (empty == true) {
 			if (turn==XX) {
 				board[row][col] = XX;
@@ -233,8 +226,6 @@ public class TicTacToe {
 				board[row][col] = OO;
 			}
 		}
-
-		//TODO check for the winner
 
 		//Checks for vertical win
 		for (int x = 0; x<GRID; x++) {
@@ -289,7 +280,7 @@ public class TicTacToe {
 			frame.setTitle("O Wins!");
 		}
 
-		//TODO check for tie
+		//check for tie
 		if (empty==true) {
 			emptyCount--;
 		}
@@ -301,7 +292,7 @@ public class TicTacToe {
 			frame.setTitle("Cat's Game!");
 		}
 
-		//TODO change turn
+		//change turn
 		if (turn==XX) {
 			turn=OO;
 		} else {

@@ -49,7 +49,7 @@ public class LoadingIcon2 extends JPanel{
 		cx = panW/2;
 		cy = panH/2;
 		img = new BufferedImage(panW,panH, BufferedImage.TYPE_INT_RGB);
-		this.setBackground(Color.WHITE);	//the JPanel has a white background, but you'll never see it ...
+		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(panW, panH));
 
 		timer = new Timer(1, new Timer1());
@@ -58,7 +58,6 @@ public class LoadingIcon2 extends JPanel{
 	}
 
 	public void paintComponent(Graphics g) {
-		//Draw onto a BufferedImage (elsewhere) and then display it here
 		g.drawImage(img, 0, 0, null);	
 	}
 
@@ -67,7 +66,6 @@ public class LoadingIcon2 extends JPanel{
 		private boolean reverse = false;
 		public void actionPerformed(ActionEvent e) {
 
-			//get the graphics object from the image so that we can draw on it.
 			Graphics2D g2 = img.createGraphics();
 
 			//Enables AntiAliasing
@@ -126,7 +124,7 @@ public class LoadingIcon2 extends JPanel{
 			}
 
 
-			repaint(); // to speed things up, don't repaint every single timer tick. Swing coalesces a number of repaints into one
+			repaint();
 		}
 
 
