@@ -32,7 +32,7 @@ public class Elevators {
 	}
 
 	void goToFloor(boolean doorsOpen, boolean powerOn) {
-		if (doorsOpen = false && powerOn = true && floor+n <= topFloor) {
+		if (doorsOpen == false && powerOn == true && floor+n <= topFloor) {
 			floor += n; 
 		} else System.out.println("Please check if doors are closed, the power is on and you only to to the top floor");
 	}

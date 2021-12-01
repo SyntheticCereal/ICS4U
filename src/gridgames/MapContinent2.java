@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-//Starting class for MapContinent program
+//Starting class for MapContinent2 program
 
-public class MapContinent {
+public class MapContinent2 {
 	public static void main(String[] args) {
-		new MapContinent();
+		new MapContinent2();
 	}
 
 	// constants
@@ -32,9 +32,9 @@ public class MapContinent {
 	// global variables
 	int[][] board = new int[GRID][GRID];
 	int landTiles = 0;
-	JFrame frame = new JFrame("MapContinent Problem #1-4");
+	JFrame frame = new JFrame("MapContinent2 Problem #1-4");
 
-	MapContinent() { // constructor
+	MapContinent2() { // constructor
 		initGame();
 		createAndShowGUI();
 	}
@@ -49,7 +49,7 @@ public class MapContinent {
 				board[i][j] = EMPTY;
 			}
 		}
-//		makeRandomMap();
+		//		makeRandomMap();
 		makeContinents();
 	}
 
@@ -69,6 +69,7 @@ public class MapContinent {
 					if (landTiles == NUM_LAND) {
 						break;
 					}
+
 				}
 				if (landTiles == NUM_LAND) {
 					break;
@@ -78,9 +79,8 @@ public class MapContinent {
 	}
 
 	void makeContinents() {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
-		int h = (int) (Math.random() * GRID);
-		int v = (int) (Math.random() * GRID);
+		int h = (int) (Math.random() * GRID - 1);
+		int v = (int) (Math.random() * GRID - 1);
 
 		board[h][v] = LAND;
 		landTiles++;
@@ -93,104 +93,109 @@ public class MapContinent {
 		makeContinentsSW(h, v);
 		if (landTiles >= NUM_LAND) return;
 		makeContinentsSE(h, v);
-		
-		if (landTiles < NUM_LAND) {
+
+		while (landTiles < NUM_LAND) {
+			makeContinents();
+		}
+
+		if (landTiles != NUM_LAND) {
 			makeContinents();
 		}
 
 	}
 
 	void makeContinentsNE(int h, int v) {
+		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
-			if (board[h + 1][v] != LAND) {
 				board[h + 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNE(h + 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsNE(h + 1, v);
+					}
 				}
-			}
 		}
 
 		if (v - 1 >= 0) {
-			if (board[h][v - 1] != LAND) {
 				board[h][v - 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNE(h, v - 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45)  {
+						makeContinentsNE(h, v - 1);
 				}
 			}
 		}
 	}
 
 	void makeContinentsNW(int h, int v) {
-
+		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
-			if (board[h - 1][v] != LAND) {
 				board[h - 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNW(h - 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsNW(h - 1, v);
 				}
 			}
 		}
 
 		if (v - 1 >= 0) {
-			if (board[h][v - 1] != LAND) {
 				board[h][v - 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNW(h, v - 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsNW(h, v - 1);
 				}
 			}
 		}
 	}
 
 	void makeContinentsSW(int h, int v) {
-
+		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
-			if (board[h - 1][v] != LAND) {
 				board[h - 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSW(h - 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsSW(h - 1, v);
 				}
 			}
 		}
 
 		if (v + 1 < GRID) {
-			if (board[h][v + 1] != LAND) {
 				board[h][v + 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSW(h, v + 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsSW(h, v + 1);
 				}
 			}
 		}
 	}
 
 	void makeContinentsSE(int h, int v) {
-
+		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
-			if (board[h + 1][v] != LAND) {
 				board[h + 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSE(h + 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsSE(h + 1, v);
 				}
 			}
 		}
 
 		if (v + 1 < GRID) {
-			if (board[h][v + 1] != LAND) {
 				board[h][v + 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSE(h, v + 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.45) {
+						makeContinentsSE(h, v + 1);
+					}
 				}
-			}
 		}
 	}
-	
+
 	// PROBLEM 2: Fix the function "findLakes()" so that it colours all empty
 	// squares that are adjacent to this one.
 	// PROBLEM 3: Once you have solved problem 2, now set things up so that if any
@@ -278,7 +283,7 @@ public class MapContinent {
 		DrawingPanel panel = new DrawingPanel();
 
 		// JFrame.setDefaultLookAndFeelDecorated(true);
-		//		JFrame frame = new JFrame("MapContinent Problem #1-4");
+		//		JFrame frame = new JFrame("MapContinent2 Problem #1-4");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container content = frame.getContentPane();
 		// content.setLayout(new BorderLayout(2,2));
@@ -315,8 +320,8 @@ public class MapContinent {
 		void initGraphics() {
 			jpanW = this.getSize().width;
 			jpanH = this.getSize().height;
-			blockX = (int) ((jpanW / GRID));// + 0.5);
-			blockY = (int) ((jpanH / GRID));// + 0.5);
+			blockX = (int) ((jpanW / GRID) + 0.5);
+			blockY = (int) ((jpanH / GRID) + 0.5);
 			// System.out.println("init");
 		}
 
@@ -324,11 +329,11 @@ public class MapContinent {
 			super.paintComponent(g);
 
 			// Draw white grid
-			//			g.setColor(Color.WHITE);
-			//			for (int i = 0; i < GRID; i++) {
-			//				g.drawLine(blockX * i, 0, blockX * i, jpanH);
-			//				g.drawLine(0, blockY * i, jpanW, blockY * i);
-			//			}
+			g.setColor(Color.WHITE);
+			for (int i = 0; i < GRID; i++) {
+				g.drawLine(blockX * i, 0, blockX * i, jpanH);
+				g.drawLine(0, blockY * i, jpanW, blockY * i);
+			}
 
 			for (int i = 0; i < GRID; i++) {
 				for (int j = 0; j < GRID; j++) {
@@ -343,19 +348,19 @@ public class MapContinent {
 
 			if (terrain == EMPTY) {
 				g.setColor(COLOUREMPTY);
-				g.fillRect(blockX * i + 1, blockY * j + 1, blockX, blockY);
+				g.fillRect(blockX * i + 1, blockY * j + 1, blockX - 2, blockY - 2);
 			}
 			if (terrain == LAND) {
 				g.setColor(COLOURLAND);
-				g.fillRect(blockX * i + 1, blockY * j + 1, blockX, blockY);
+				g.fillRect(blockX * i + 1, blockY * j + 1, blockX - 2, blockY - 2);
 			}
 			if (terrain == LAKE) {
 				g.setColor(COLOURLAKE);
-				g.fillRect(blockX * i + 1, blockY * j + 1, blockX, blockY);
+				g.fillRect(blockX * i + 1, blockY * j + 1, blockX - 2, blockY - 2);
 			}
 			if (terrain == OCEAN) {
 				g.setColor(COLOUROCEAN);
-				g.fillRect(blockX * i + 1, blockY * j + 1, blockX, blockY);
+				g.fillRect(blockX * i + 1, blockY * j + 1, blockX - 2, blockY - 2);
 			}
 		}
 
