@@ -82,7 +82,7 @@ public class MapContinent2 {
 		int h = (int) (Math.random() * GRID - 1);
 		int v = (int) (Math.random() * GRID - 1);
 
-		board[h][v] = LAND;
+		board[h][v] = LAKE;
 		landTiles++;
 
 		if (landTiles >= NUM_LAND) return;
@@ -101,7 +101,6 @@ public class MapContinent2 {
 		if (landTiles != NUM_LAND) {
 			makeContinents();
 		}
-
 	}
 
 	void makeContinentsNE(int h, int v) {

@@ -1,10 +1,10 @@
 package elevators;
 
 public class Elevators {
-	static String manufacturer = "Otis";
-	static int topFloor = 10;
-	static int maxOccupants = 25;
-	final static boolean powerOn = true;
+	final static String manufacturer = "Otis";
+	final static int topFloor = 10;
+	final static int maxOccupants = 25;
+	static boolean powerOn = true;
 
 	private int floor = 1;
 	private int people = 0;
@@ -16,36 +16,64 @@ public class Elevators {
 
 	Elevators(int floor) {
 		if (floor < 0 || floor > topFloor) {
-			floor = 0;
+			floor = 1;
 		}
 	}
 
-	static void setPowerState () {
+	static void setPowerState (boolean newState) {
+		newState = powerOn;
+		if (newState != powerOn) {
+			System.out.println("The state of the power has changed");
+		}
 	}
 
-	void up () {
-		floor++;
+	static void getPowerState() {
+
+	}
+
+	void up() {
+		if (doorsOpen == false && powerOn == true && floor++ <= topFloor) {
+			floor++;
+		}
 	}
 
 	void down() {
-		floor--;
-	}
-
-	void goToFloor(boolean doorsOpen, boolean powerOn) {
-		if (doorsOpen == false && powerOn == true && floor+n <= topFloor) {
-			floor += n; 
-		} else System.out.println("Please check if doors are closed, the power is on and you only to to the top floor");
-	}
-
-	void addPeople() {
-		if (doorsOpen = true && people+n <= maxOccupants && n >= 0) {
-			people+= n; 
+		if (doorsOpen == false && powerOn == true && floor-- >= topFloor) {
+			floor--;
 		}
 	}
 
-	void removePeople() {
-		if (doorsOpen = true && people-n >= 0 && n >= 0) {
-			people-= n; 
+	void openDoors() {
+		if (powerOn == true) {
+			doorsOpen = true;
+		} else {
+			System.out.println("Error! Power is not on!");
+		}
+	}
+
+	void closeDoors() {
+		if (powerOn == true) {
+			doorsOpen = false;
+		}else {
+			System.out.println("Error! Power is not on!");
+		}
+	}
+
+	void goToFloor(int fTraveled) {
+		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor) {
+			floor += fTraveled; 
+		} else System.out.println("Please check if doors are closed, the power is on and you only go to the top floor");
+	}
+
+	void addPeople(int morePeople) {
+		if (doorsOpen == true && people+morePeople <= maxOccupants && morePeople >= 0) {
+			people+= morePeople; 
+		}
+	}
+
+	void removePeople(int lessPeople) {
+		if (doorsOpen == true && people-lessPeople >= 0 && lessPeople >= 0) {
+			people-= lessPeople; 
 		}
 	}
 

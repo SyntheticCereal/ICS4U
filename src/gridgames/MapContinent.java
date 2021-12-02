@@ -49,7 +49,7 @@ public class MapContinent {
 				board[i][j] = EMPTY;
 			}
 		}
-//		makeRandomMap();
+		//		makeRandomMap();
 		makeContinents();
 	}
 
@@ -93,7 +93,7 @@ public class MapContinent {
 		makeContinentsSW(h, v);
 		if (landTiles >= NUM_LAND) return;
 		makeContinentsSE(h, v);
-		
+
 		if (landTiles < NUM_LAND) {
 			makeContinents();
 		}
@@ -190,7 +190,7 @@ public class MapContinent {
 			}
 		}
 	}
-	
+
 	// PROBLEM 2: Fix the function "findLakes()" so that it colours all empty
 	// squares that are adjacent to this one.
 	// PROBLEM 3: Once you have solved problem 2, now set things up so that if any
