@@ -33,6 +33,7 @@ public class MapContinent2 {
 	int[][] board = new int[GRID][GRID];
 	int landTiles = 0;
 	JFrame frame = new JFrame("MapContinent2 Problem #1-4");
+	int numCont = (int)(Math.random()*9)+1;
 
 	MapContinent2() { // constructor
 		initGame();
@@ -49,8 +50,9 @@ public class MapContinent2 {
 				board[i][j] = EMPTY;
 			}
 		}
+		makeOrigin();
 		//		makeRandomMap();
-		makeContinents();
+		//		makeContinents();
 	}
 
 	void makeRandomMap() {
@@ -78,7 +80,71 @@ public class MapContinent2 {
 		}
 	}
 
+	void makeOrigin(){
+		double h;
+		double v;
+		for(int i = 0; i<numCont; i++) {
+			h = Math.random()*GRID;
+			v = Math.random()*GRID;
+			System.out.println(h + " " + v);
+
+			board[(int)h][(int)v] = LAKE;
+			landTiles++;
+		}
+		createLand();
+	}
+
+	void createLand (){
+		while (landTiles <= NUM_LAND) {
+			for (int j = 0; j<GRID; j++) {
+				for (int i = 0; i<GRID; i++) {
+					double chance = Math.random();
+
+					if (i-1 >= 0) {
+						if (board[i-1][j] == LAND) {
+							chance -= 0.1;
+						}
+					}
+
+					if (i+1 < GRID) {
+						if (board[i+1][j] == LAND) {
+							chance -= 0.1;
+						}
+					}
+					if (j-1 >= 0) {
+						if (board[i][j-1] == LAND) {
+							chance -= 0.1;
+						}
+					}
+					if ( j+1 < GRID) {
+						if (board[i][j+1] == LAND) {
+							chance -= 0.1;
+						}
+					}
+
+					if (board[i][j] == LAND) {
+						if (chance < 0.1) {
+							board[i][j] = LAND;
+							landTiles++;
+						}
+
+						if (landTiles > NUM_LAND) {
+							break;
+						}
+					}
+					if (landTiles > NUM_LAND) {
+						break;
+					}
+				}
+				if (landTiles > NUM_LAND) {
+					break;
+				}
+			}
+		}
+	}
+
 	void makeContinents() {
+		makeOrigin();
 		int h = (int) (Math.random() * GRID - 1);
 		int v = (int) (Math.random() * GRID - 1);
 
@@ -106,21 +172,21 @@ public class MapContinent2 {
 	void makeContinentsNE(int h, int v) {
 		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
-				board[h + 1][v] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsNE(h + 1, v);
-					}
+			board[h + 1][v] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsNE(h + 1, v);
 				}
+			}
 		}
 
 		if (v - 1 >= 0) {
-				board[h][v - 1] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45)  {
-						makeContinentsNE(h, v - 1);
+			board[h][v - 1] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65)  {
+					makeContinentsNE(h, v - 1);
 				}
 			}
 		}
@@ -129,21 +195,21 @@ public class MapContinent2 {
 	void makeContinentsNW(int h, int v) {
 		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
-				board[h - 1][v] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsNW(h - 1, v);
+			board[h - 1][v] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsNW(h - 1, v);
 				}
 			}
 		}
 
 		if (v - 1 >= 0) {
-				board[h][v - 1] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsNW(h, v - 1);
+			board[h][v - 1] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsNW(h, v - 1);
 				}
 			}
 		}
@@ -152,21 +218,21 @@ public class MapContinent2 {
 	void makeContinentsSW(int h, int v) {
 		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
-				board[h - 1][v] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsSW(h - 1, v);
+			board[h - 1][v] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsSW(h - 1, v);
 				}
 			}
 		}
 
 		if (v + 1 < GRID) {
-				board[h][v + 1] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsSW(h, v + 1);
+			board[h][v + 1] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsSW(h, v + 1);
 				}
 			}
 		}
@@ -175,23 +241,23 @@ public class MapContinent2 {
 	void makeContinentsSE(int h, int v) {
 		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
-				board[h + 1][v] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsSE(h + 1, v);
+			board[h + 1][v] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsSE(h + 1, v);
 				}
 			}
 		}
 
 		if (v + 1 < GRID) {
-				board[h][v + 1] = LAND;
-				landTiles++;
-				if (landTiles < NUM_LAND) {
-					if (Math.random()<0.45) {
-						makeContinentsSE(h, v + 1);
-					}
+			board[h][v + 1] = LAND;
+			landTiles++;
+			if (landTiles < NUM_LAND) {
+				if (Math.random()<0.65) {
+					makeContinentsSE(h, v + 1);
 				}
+			}
 		}
 	}
 

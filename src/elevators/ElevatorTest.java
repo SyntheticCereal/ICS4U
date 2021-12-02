@@ -6,26 +6,27 @@ public class ElevatorTest {
 		Elevators east = new Elevators(5);
 		Elevators south = new Elevators();
 
+		south.openDoors();
 		south.addPeople(10);
-		south.toString();
+		System.out.println(south.toString());
 		south.closeDoors();
 		south.goToFloor(4);
 		south.openDoors();
 		south.removePeople(3);
-		south.toString();
+		System.out.println(south.toString());
 		south.closeDoors();
 		south.goToFloor(25);
 		south.openDoors();
 		south.removePeople(6);
-		south.toString();
+		System.out.println(south.toString());
 		
 		east.addPeople(8);
-		east.toString();
+		System.out.println(east.toString());
 		east.closeDoors();
 		east.goToFloor(8);
 		east.openDoors();
 		east.addPeople(30);
-		east.toString();
+		System.out.println(east.toString());
 		
 		east.closeDoors();
 		east.goToFloor(-1);
