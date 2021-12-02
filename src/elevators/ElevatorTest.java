@@ -20,6 +20,10 @@ public class ElevatorTest {
 		south.removePeople(6);
 		System.out.println(south.toString());
 		
+		
+		System.out.println(" ");
+		
+		east.openDoors();
 		east.addPeople(8);
 		System.out.println(east.toString());
 		east.closeDoors();
@@ -40,6 +44,8 @@ public class ElevatorTest {
 		south.goToFloor(2);
 		
 		east.openDoors();
+		
+		System.out.println("test");
 		
 		Elevators.setPowerState(false);
 		

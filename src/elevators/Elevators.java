@@ -56,16 +56,16 @@ public class Elevators {
 	}
 
 	void goToFloor(int fTraveled) {
-		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor && floor-fTraveled > 0) {
-			floor += fTraveled; 
-		} else if (powerOn == false) {
-			System.out.println("Please check if power is on");
-		} else if (doorsOpen == true) {
-			System.out.println("Please close the door");
-		} else if (floor+fTraveled > topFloor || floor-fTraveled <= 0) {
-			System.out.println("Please travel to a valid floor");
-		}
-		
+//		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor && floor-fTraveled > 0) {
+			floor = fTraveled;
+//		} else if (powerOn == false) {
+//			System.out.println("Please check if power is on");
+//		} else if (doorsOpen == true) {
+//			System.out.println("Please close the door");
+//		} else if (floor+fTraveled > topFloor || floor-fTraveled <= 0) {
+//			System.out.println("Please travel to a valid floor");
+//		}
+//		}
 	}
 
 	void addPeople(int morePeople) {
