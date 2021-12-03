@@ -23,8 +23,8 @@ public class Elevators {
 	static void setPowerState (boolean newState) {
 		if (newState != powerOn) {
 			System.out.println("The state of the power has changed");
+			newState = powerOn;
 		}
-		newState = powerOn;
 	}
 
 	void up() {

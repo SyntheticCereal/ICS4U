@@ -45,8 +45,6 @@ public class ElevatorTest {
 		
 		east.openDoors();
 		
-		System.out.println("test");
-		
 		Elevators.setPowerState(false);
 		
 		east.up();

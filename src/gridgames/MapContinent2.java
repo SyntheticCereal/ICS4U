@@ -12,7 +12,7 @@ public class MapContinent2 {
 	}
 
 	// constants
-	final static int GRID = 100; // size of grid/board
+	final static int GRID = 10; // size of grid/board
 	final static int SQSIZE = 10; // size of each square in pixels
 	final static int NUM_LAND = (GRID * GRID / 2); // number of land tiles
 
@@ -91,7 +91,7 @@ public class MapContinent2 {
 			board[(int)h][(int)v] = LAKE;
 			landTiles++;
 		}
-		createLand();
+				createLand();
 	}
 
 	void createLand (){
@@ -122,22 +122,13 @@ public class MapContinent2 {
 						}
 					}
 
-					if (board[i][j] == LAND) {
+//					if (board[i][j] == LAND) {
 						if (chance < 0.1) {
 							board[i][j] = LAND;
 							landTiles++;
-						}
+//						}
 
-						if (landTiles > NUM_LAND) {
-							break;
 						}
-					}
-					if (landTiles > NUM_LAND) {
-						break;
-					}
-				}
-				if (landTiles > NUM_LAND) {
-					break;
 				}
 			}
 		}
