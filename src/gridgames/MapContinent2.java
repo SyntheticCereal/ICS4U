@@ -20,8 +20,13 @@ public class MapContinent2 {
 	}
 
 	// constants
+<<<<<<< HEAD
 	final static int GRID = 32; // size of grid/board
 	final static int SQSIZE = 20; // size of each square in pixels
+=======
+	final static int GRID = 10; // size of grid/board
+	final static int SQSIZE = 10; // size of each square in pixels
+>>>>>>> master
 	final static int NUM_LAND = (GRID * GRID / 2); // number of land tiles
 
 	// terrain
@@ -106,7 +111,7 @@ public class MapContinent2 {
 				v = Math.random()*GRID;
 			}
 		}
-		createLand();
+				createLand();
 	}
 
 	//Creates land tiles, increases chance of land if its adjacent to land
@@ -139,6 +144,7 @@ public class MapContinent2 {
 						}
 					}
 
+<<<<<<< HEAD
 					//If its a valid square and if chance is <0.1 it creates land
 					if (board[i][j] == EMPTY) {
 						if (chance < 0.1) {
@@ -153,6 +159,15 @@ public class MapContinent2 {
 				}
 				if (landTiles == NUM_LAND) { //Breaks vertical for loop
 					break;
+=======
+//					if (board[i][j] == LAND) {
+						if (chance < 0.1) {
+							board[i][j] = LAND;
+							landTiles++;
+//						}
+
+						}
+>>>>>>> master
 				}
 			}
 			if (landTiles == NUM_LAND) { //Breaks while loop
