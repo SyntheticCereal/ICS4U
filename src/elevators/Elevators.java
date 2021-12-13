@@ -24,13 +24,13 @@ public class Elevators {
 		if (newState != powerOn) {
 			System.out.println("The state of the power has changed");
 		}
-		newState = powerOn;
+		powerOn = newState;
 	}
 
 	void up() {
 		if (doorsOpen == false && powerOn == true && floor++ <= topFloor) {
 			floor++;
-		}
+		} 
 	}
 
 	void down() {
@@ -79,6 +79,7 @@ public class Elevators {
 			people-= lessPeople; 
 		}
 	}
+	
 
 	@Override
 	public String toString() {

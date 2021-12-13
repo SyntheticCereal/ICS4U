@@ -4,6 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/*
+ * Chris S
+ * 11/12/21
+ * MapContinent Program
+ * Generates an equal amount of land to empty spaces
+ * Fills empty space if clicked on, filled with ocean if touching the edge, if not fills with lake
+ */
+
 //Starting class for MapContinent2 program
 
 public class MapContinent2 {
@@ -12,8 +20,8 @@ public class MapContinent2 {
 	}
 
 	// constants
-	final static int GRID = 100; // size of grid/board
-	final static int SQSIZE = 10; // size of each square in pixels
+	final static int GRID = 32; // size of grid/board
+	final static int SQSIZE = 20; // size of each square in pixels
 	final static int NUM_LAND = (GRID * GRID / 2); // number of land tiles
 
 	// terrain
@@ -32,7 +40,7 @@ public class MapContinent2 {
 	// global variables
 	int[][] board = new int[GRID][GRID];
 	int landTiles = 0;
-	JFrame frame = new JFrame("MapContinent2 Problem #1-4");
+	JFrame frame = new JFrame("MapContinent");
 	int numCont = (int)(Math.random()*9)+1;
 
 	MapContinent2() { // constructor
@@ -54,7 +62,8 @@ public class MapContinent2 {
 		//		makeRandomMap();
 		//		makeContinents();
 	}
-
+	
+	//Fills board with random land tiles
 	void makeRandomMap() {
 		int i, j;
 		i = j = 0;
@@ -79,70 +88,80 @@ public class MapContinent2 {
 			}
 		}
 	}
-
+	
+	//Creates random origin points
 	void makeOrigin(){
 		double h;
 		double v;
 		for(int i = 0; i<numCont; i++) {
+			//Creates random coordinates
 			h = Math.random()*GRID;
 			v = Math.random()*GRID;
-			System.out.println(h + " " + v);
-
-			board[(int)h][(int)v] = LAKE;
-			landTiles++;
+			//Only fills if its land
+			if (board[(int)h][(int)v] == EMPTY) {
+				landTiles++;
+				board[(int)h][(int)v] = LAND;
+			} else { //If not creates new coordinates
+				h = Math.random()*GRID;
+				v = Math.random()*GRID;
+			}
 		}
 		createLand();
 	}
 
+	//Creates land tiles, increases chance of land if its adjacent to land
 	void createLand (){
-		while (landTiles <= NUM_LAND) {
+		while (landTiles < NUM_LAND) {
 			for (int j = 0; j<GRID; j++) {
 				for (int i = 0; i<GRID; i++) {
 					double chance = Math.random();
 
+					//Increases chance of land
 					if (i-1 >= 0) {
 						if (board[i-1][j] == LAND) {
-							chance -= 0.1;
+							chance -= 0.3;
 						}
 					}
 
 					if (i+1 < GRID) {
 						if (board[i+1][j] == LAND) {
-							chance -= 0.1;
+							chance -= 0.3;
 						}
 					}
 					if (j-1 >= 0) {
 						if (board[i][j-1] == LAND) {
-							chance -= 0.1;
+							chance -= 0.3;
 						}
 					}
 					if ( j+1 < GRID) {
 						if (board[i][j+1] == LAND) {
-							chance -= 0.1;
+							chance -= 0.3;
 						}
 					}
 
-					if (board[i][j] == LAND) {
+					//If its a valid square and if chance is <0.1 it creates land
+					if (board[i][j] == EMPTY) {
 						if (chance < 0.1) {
 							board[i][j] = LAND;
 							landTiles++;
 						}
+					}
 
-						if (landTiles > NUM_LAND) {
-							break;
-						}
-					}
-					if (landTiles > NUM_LAND) {
+					if (landTiles == NUM_LAND) { //Breaks horizontal for loop
 						break;
-					}
+					}	
 				}
-				if (landTiles > NUM_LAND) {
+				if (landTiles == NUM_LAND) { //Breaks vertical for loop
 					break;
 				}
 			}
+			if (landTiles == NUM_LAND) { //Breaks while loop
+				break;
+			}
 		}
 	}
-
+	
+	//Scrapped code I didn't want to get rid of
 	void makeContinents() {
 		makeOrigin();
 		int h = (int) (Math.random() * GRID - 1);
@@ -169,8 +188,8 @@ public class MapContinent2 {
 		}
 	}
 
+	//Scrapped code I didn't want to get rid of
 	void makeContinentsNE(int h, int v) {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
 			board[h + 1][v] = LAND;
 			landTiles++;
@@ -192,8 +211,8 @@ public class MapContinent2 {
 		}
 	}
 
+	//Scrapped code I didn't want to get rid of
 	void makeContinentsNW(int h, int v) {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
 			board[h - 1][v] = LAND;
 			landTiles++;
@@ -215,8 +234,8 @@ public class MapContinent2 {
 		}
 	}
 
+	//Scrapped code I didn't want to get rid of
 	void makeContinentsSW(int h, int v) {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h - 1 >= 0) {
 			board[h - 1][v] = LAND;
 			landTiles++;
@@ -238,8 +257,8 @@ public class MapContinent2 {
 		}
 	}
 
+	//Scrapped code I didn't want to get rid of
 	void makeContinentsSE(int h, int v) {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
 		if (h + 1 < GRID) {
 			board[h + 1][v] = LAND;
 			landTiles++;
@@ -260,15 +279,10 @@ public class MapContinent2 {
 			}
 		}
 	}
-
-	// PROBLEM 2: Fix the function "findLakes()" so that it colours all empty
-	// squares that are adjacent to this one.
-	// PROBLEM 3: Once you have solved problem 2, now set things up so that if any
-	// part
-	// of a lake touches the edge of the board it becomes an ocean.
+	
+	//Uses recursion to fill with lakes
+	//Method calls itself for going up, down, left and right
 	void findLakes(int x, int y) {
-		// call subroutine to colour in all contiguous lake squares
-
 		if (board[x][y] == EMPTY) {
 			board[x][y] = LAKE;
 		}
@@ -310,6 +324,7 @@ public class MapContinent2 {
 
 	}
 
+	//Checks if any lake tile is touching the edge, if so uses recursion to fill with ocean
 	void findOceans(int x, int y) {
 		if (board[x][y] == LAKE) {
 			board[x][y] = OCEAN;

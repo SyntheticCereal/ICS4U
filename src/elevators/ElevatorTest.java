@@ -20,7 +20,6 @@ public class ElevatorTest {
 		south.removePeople(6);
 		System.out.println(south.toString());
 		
-		
 		System.out.println(" ");
 		
 		east.openDoors();
@@ -32,20 +31,24 @@ public class ElevatorTest {
 		east.addPeople(30);
 		System.out.println(east.toString());
 		
+		System.out.println(" ");
+		
 		east.closeDoors();
 		east.goToFloor(-1);
 		east.goToFloor(26);
+		
+		System.out.println(" ");
 		
 		south.closeDoors();
 		south.goToFloor(-1);
 		south.goToFloor(26);
 		
+		System.out.println(" ");
+		
 		east.goToFloor(2);
 		south.goToFloor(2);
 		
 		east.openDoors();
-		
-		System.out.println("test");
 		
 		Elevators.setPowerState(false);
 		
@@ -61,13 +64,16 @@ public class ElevatorTest {
 		
 		Elevators.setPowerState(true);
 		Elevators.setPowerState(true);
+		System.out.println(" ");
 		
 		south.goToFloor(1);
+		System.out.println(south.toString());
 		
-		for (int i = 0; i <=10; i++) {
+		for (int i = 0; i <10; i++) {
 			south.closeDoors();
-			south.up();
+			south.goToFloor(i+1);
 			south.openDoors();
+			System.out.println(south.toString());
 		}
 		
 	}
