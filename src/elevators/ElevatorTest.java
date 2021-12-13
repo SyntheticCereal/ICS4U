@@ -31,13 +31,9 @@ public class ElevatorTest {
 		east.addPeople(30);
 		System.out.println(east.toString());
 		
-		System.out.println(" ");
-		
 		east.closeDoors();
 		east.goToFloor(-1);
 		east.goToFloor(26);
-		
-		System.out.println(" ");
 		
 		south.closeDoors();
 		south.goToFloor(-1);
@@ -68,10 +64,11 @@ public class ElevatorTest {
 		
 		south.goToFloor(1);
 		System.out.println(south.toString());
+		System.out.println(" ");
 		
 		for (int i = 0; i <10; i++) {
 			south.closeDoors();
-			south.goToFloor(i+1);
+			south.up();
 			south.openDoors();
 			System.out.println(south.toString());
 		}

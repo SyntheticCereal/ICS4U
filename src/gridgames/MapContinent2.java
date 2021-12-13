@@ -10,6 +10,7 @@ import javax.swing.*;
  * MapContinent Program
  * Generates an equal amount of land to empty spaces
  * Fills empty space if clicked on, filled with ocean if touching the edge, if not fills with lake
+ * Ignore makeContinents, the method counts incorrectly and I couldn't figure out how to fix it
  */
 
 //Starting class for MapContinent2 program
@@ -20,13 +21,8 @@ public class MapContinent2 {
 	}
 
 	// constants
-<<<<<<< HEAD
-	final static int GRID = 32; // size of grid/board
-	final static int SQSIZE = 20; // size of each square in pixels
-=======
-	final static int GRID = 10; // size of grid/board
+	final static int GRID = 64; // size of grid/board
 	final static int SQSIZE = 10; // size of each square in pixels
->>>>>>> master
 	final static int NUM_LAND = (GRID * GRID / 2); // number of land tiles
 
 	// terrain
@@ -124,50 +120,39 @@ public class MapContinent2 {
 					//Increases chance of land
 					if (i-1 >= 0) {
 						if (board[i-1][j] == LAND) {
-							chance -= 0.3;
+							chance -= 0.45;
 						}
 					}
 
 					if (i+1 < GRID) {
 						if (board[i+1][j] == LAND) {
-							chance -= 0.3;
+							chance -= 0.45;
 						}
 					}
 					if (j-1 >= 0) {
 						if (board[i][j-1] == LAND) {
-							chance -= 0.3;
+							chance -= 0.45;
 						}
 					}
 					if ( j+1 < GRID) {
 						if (board[i][j+1] == LAND) {
-							chance -= 0.3;
+							chance -= 0.45;
 						}
 					}
 
-<<<<<<< HEAD
 					//If its a valid square and if chance is <0.1 it creates land
 					if (board[i][j] == EMPTY) {
-						if (chance < 0.1) {
+						if (chance < 0.01) {
 							board[i][j] = LAND;
 							landTiles++;
 						}
 					}
-
 					if (landTiles == NUM_LAND) { //Breaks horizontal for loop
 						break;
 					}	
 				}
 				if (landTiles == NUM_LAND) { //Breaks vertical for loop
 					break;
-=======
-//					if (board[i][j] == LAND) {
-						if (chance < 0.1) {
-							board[i][j] = LAND;
-							landTiles++;
-//						}
-
-						}
->>>>>>> master
 				}
 			}
 			if (landTiles == NUM_LAND) { //Breaks while loop
@@ -176,6 +161,7 @@ public class MapContinent2 {
 		}
 	}
 	
+	//All makeContinent methods count incorrectly
 	//Scrapped code I didn't want to get rid of
 	void makeContinents() {
 		makeOrigin();

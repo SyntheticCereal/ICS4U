@@ -23,16 +23,12 @@ public class Elevators {
 	static void setPowerState (boolean newState) {
 		if (newState != powerOn) {
 			System.out.println("The state of the power has changed");
-			newState = powerOn;
+			powerOn = newState;
 		}
-<<<<<<< HEAD
-		powerOn = newState;
-=======
->>>>>>> master
 	}
 
 	void up() {
-		if (doorsOpen == false && powerOn == true && floor++ <= topFloor) {
+		if (!doorsOpen && powerOn && floor++ <= topFloor) {
 			floor++;
 		} 
 	}
@@ -60,16 +56,9 @@ public class Elevators {
 	}
 
 	void goToFloor(int fTraveled) {
-//		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor && floor-fTraveled > 0) {
+		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor && fTraveled>0) {
 			floor = fTraveled;
-//		} else if (powerOn == false) {
-//			System.out.println("Please check if power is on");
-//		} else if (doorsOpen == true) {
-//			System.out.println("Please close the door");
-//		} else if (floor+fTraveled > topFloor || floor-fTraveled <= 0) {
-//			System.out.println("Please travel to a valid floor");
-//		}
-//		}
+		}
 	}
 
 	void addPeople(int morePeople) {
@@ -83,7 +72,7 @@ public class Elevators {
 			people-= lessPeople; 
 		}
 	}
-	
+
 
 	@Override
 	public String toString() {
