@@ -15,7 +15,7 @@ import javax.swing.*;
 
 //Starting class for MapContinent2 program
 
-public class MapContinent2 {
+public class MapContinent2{
 	public static void main(String[] args) {
 		new MapContinent2();
 	}
@@ -42,7 +42,6 @@ public class MapContinent2 {
 	int[][] board = new int[GRID][GRID];
 	int landTiles = 0;
 	JFrame frame = new JFrame("MapContinent");
-	int numCont = (int)(Math.random()*9)+1;
 
 	MapContinent2() { // constructor
 		initGame();
@@ -60,10 +59,9 @@ public class MapContinent2 {
 			}
 		}
 		makeOrigin();
-		//		makeRandomMap();
-		//		makeContinents();
+		//makeRandomMap();
 	}
-	
+
 	//Fills board with random land tiles
 	void makeRandomMap() {
 		int i, j;
@@ -89,11 +87,12 @@ public class MapContinent2 {
 			}
 		}
 	}
-	
+
 	//Creates random origin points
 	void makeOrigin(){
-		double h;
-		double v;
+		double h; //Horizontal coordinate
+		double v; //Vertical coordinate
+		int numCont = (int)(Math.random()*9)+1;
 		for(int i = 0; i<numCont; i++) {
 			//Creates random coordinates
 			h = Math.random()*GRID;
@@ -107,7 +106,7 @@ public class MapContinent2 {
 				v = Math.random()*GRID;
 			}
 		}
-				createLand();
+		createLand();
 	}
 
 	//Creates land tiles, increases chance of land if its adjacent to land
@@ -160,127 +159,9 @@ public class MapContinent2 {
 			}
 		}
 	}
-	
-	//All makeContinent methods count incorrectly
-	//Scrapped code I didn't want to get rid of
-	void makeContinents() {
-		makeOrigin();
-		int h = (int) (Math.random() * GRID - 1);
-		int v = (int) (Math.random() * GRID - 1);
 
-		board[h][v] = LAKE;
-		landTiles++;
 
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsNW(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsNE(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsSW(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsSE(h, v);
 
-		while (landTiles < NUM_LAND) {
-			makeContinents();
-		}
-
-		if (landTiles != NUM_LAND) {
-			makeContinents();
-		}
-	}
-
-	//Scrapped code I didn't want to get rid of
-	void makeContinentsNE(int h, int v) {
-		if (h + 1 < GRID) {
-			board[h + 1][v] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsNE(h + 1, v);
-				}
-			}
-		}
-
-		if (v - 1 >= 0) {
-			board[h][v - 1] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65)  {
-					makeContinentsNE(h, v - 1);
-				}
-			}
-		}
-	}
-
-	//Scrapped code I didn't want to get rid of
-	void makeContinentsNW(int h, int v) {
-		if (h - 1 >= 0) {
-			board[h - 1][v] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsNW(h - 1, v);
-				}
-			}
-		}
-
-		if (v - 1 >= 0) {
-			board[h][v - 1] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsNW(h, v - 1);
-				}
-			}
-		}
-	}
-
-	//Scrapped code I didn't want to get rid of
-	void makeContinentsSW(int h, int v) {
-		if (h - 1 >= 0) {
-			board[h - 1][v] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsSW(h - 1, v);
-				}
-			}
-		}
-
-		if (v + 1 < GRID) {
-			board[h][v + 1] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsSW(h, v + 1);
-				}
-			}
-		}
-	}
-
-	//Scrapped code I didn't want to get rid of
-	void makeContinentsSE(int h, int v) {
-		if (h + 1 < GRID) {
-			board[h + 1][v] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsSE(h + 1, v);
-				}
-			}
-		}
-
-		if (v + 1 < GRID) {
-			board[h][v + 1] = LAND;
-			landTiles++;
-			if (landTiles < NUM_LAND) {
-				if (Math.random()<0.65) {
-					makeContinentsSE(h, v + 1);
-				}
-			}
-		}
-	}
-	
 	//Uses recursion to fill with lakes
 	//Method calls itself for going up, down, left and right
 	void findLakes(int x, int y) {
@@ -473,5 +354,4 @@ public class MapContinent2 {
 		} // end of MyMouseListener class
 
 	} // end of DrawingPanel class
-
 }

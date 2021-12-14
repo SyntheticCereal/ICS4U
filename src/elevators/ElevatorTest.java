@@ -66,9 +66,9 @@ public class ElevatorTest {
 		System.out.println(south.toString());
 		System.out.println(" ");
 		
-		for (int i = 0; i <10; i++) {
+		for (int i = 0; i <9; i++) {
 			south.closeDoors();
-			south.up();
+			south.up();;
 			south.openDoors();
 			System.out.println(south.toString());
 		}

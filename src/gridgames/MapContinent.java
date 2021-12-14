@@ -77,119 +77,124 @@ public class MapContinent {
 		}
 	}
 
-	void makeContinents() {
-		frame.setTitle(" " + landTiles + " " + NUM_LAND);
-		int h = (int) (Math.random() * GRID);
-		int v = (int) (Math.random() * GRID);
+	//All makeContinent methods count incorrectly
+		//Scrapped code I didn't want to get rid of
+		void makeContinents() {
+			int h = (int) (Math.random() * GRID - 1);
+			int v = (int) (Math.random() * GRID - 1);
 
-		board[h][v] = LAND;
-		landTiles++;
+			board[h][v] = LAKE;
+			landTiles++;
 
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsNW(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsNE(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsSW(h, v);
-		if (landTiles >= NUM_LAND) return;
-		makeContinentsSE(h, v);
+			if (landTiles >= NUM_LAND) return;
+			makeContinentsNW(h, v);
+			if (landTiles >= NUM_LAND) return;
+			makeContinentsNE(h, v);
+			if (landTiles >= NUM_LAND) return;
+			makeContinentsSW(h, v);
+			if (landTiles >= NUM_LAND) return;
+			makeContinentsSE(h, v);
 
-		if (landTiles < NUM_LAND) {
-			makeContinents();
+			while (landTiles < NUM_LAND) {
+				makeContinents();
+			}
+
+			if (landTiles != NUM_LAND) {
+				makeContinents();
+			}
 		}
 
-	}
-
-	void makeContinentsNE(int h, int v) {
-		if (h + 1 < GRID) {
-			if (board[h + 1][v] != LAND) {
+		//Scrapped code I didn't want to get rid of
+		void makeContinentsNE(int h, int v) {
+			if (h + 1 < GRID) {
 				board[h + 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNE(h + 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsNE(h + 1, v);
+					}
 				}
 			}
-		}
 
-		if (v - 1 >= 0) {
-			if (board[h][v - 1] != LAND) {
+			if (v - 1 >= 0) {
 				board[h][v - 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNE(h, v - 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65)  {
+						makeContinentsNE(h, v - 1);
+					}
 				}
 			}
 		}
-	}
 
-	void makeContinentsNW(int h, int v) {
-
-		if (h - 1 >= 0) {
-			if (board[h - 1][v] != LAND) {
+		//Scrapped code I didn't want to get rid of
+		void makeContinentsNW(int h, int v) {
+			if (h - 1 >= 0) {
 				board[h - 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNW(h - 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsNW(h - 1, v);
+					}
 				}
 			}
-		}
 
-		if (v - 1 >= 0) {
-			if (board[h][v - 1] != LAND) {
+			if (v - 1 >= 0) {
 				board[h][v - 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsNW(h, v - 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsNW(h, v - 1);
+					}
 				}
 			}
 		}
-	}
 
-	void makeContinentsSW(int h, int v) {
-
-		if (h - 1 >= 0) {
-			if (board[h - 1][v] != LAND) {
+		//Scrapped code I didn't want to get rid of
+		void makeContinentsSW(int h, int v) {
+			if (h - 1 >= 0) {
 				board[h - 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSW(h - 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsSW(h - 1, v);
+					}
 				}
 			}
-		}
 
-		if (v + 1 < GRID) {
-			if (board[h][v + 1] != LAND) {
+			if (v + 1 < GRID) {
 				board[h][v + 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSW(h, v + 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsSW(h, v + 1);
+					}
 				}
 			}
 		}
-	}
 
-	void makeContinentsSE(int h, int v) {
-
-		if (h + 1 < GRID) {
-			if (board[h + 1][v] != LAND) {
+		//Scrapped code I didn't want to get rid of
+		void makeContinentsSE(int h, int v) {
+			if (h + 1 < GRID) {
 				board[h + 1][v] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSE(h + 1, v);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsSE(h + 1, v);
+					}
 				}
 			}
-		}
 
-		if (v + 1 < GRID) {
-			if (board[h][v + 1] != LAND) {
+			if (v + 1 < GRID) {
 				board[h][v + 1] = LAND;
-				if (Math.random()<0.55) {
-					makeContinentsSE(h, v + 1);
-					landTiles++;
+				landTiles++;
+				if (landTiles < NUM_LAND) {
+					if (Math.random()<0.65) {
+						makeContinentsSE(h, v + 1);
+					}
 				}
 			}
 		}
-	}
 
 	// PROBLEM 2: Fix the function "findLakes()" so that it colours all empty
 	// squares that are adjacent to this one.

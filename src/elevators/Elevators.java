@@ -10,9 +10,7 @@ public class Elevators {
 	private int people = 0;
 	private boolean doorsOpen = false;
 
-	Elevators() {
-
-	}
+	Elevators() {}
 
 	Elevators(int floor) {
 		if (floor < 0 || floor > topFloor) {
@@ -27,48 +25,51 @@ public class Elevators {
 		}
 	}
 
+	//
 	void up() {
-		if (!doorsOpen && powerOn && floor++ <= topFloor) {
-			floor++;
-		} 
-	}
+		if (!doorsOpen && powerOn && floor++<= topFloor) {} 
+		}
 
+	//Goes down if doors are closed, power is on and is greater than 0
 	void down() {
-		if (doorsOpen == false && powerOn == true && floor-- >= topFloor) {
-			floor--;
-		} 
+		if (!doorsOpen && powerOn && floor-- >= 0) {} 
 	}
 
+	//Opens door if power is on
 	void openDoors() {
-		if (powerOn == true) {
+		if (powerOn) {
 			doorsOpen = true;
 		} else {
 			System.out.println("Error! Power is not on!");
 		}
 	}
 
+	//Closes door if power is on
 	void closeDoors() {
-		if (powerOn == true) {
+		if (powerOn) {
 			doorsOpen = false;
 		}else {
 			System.out.println("Error! Power is not on!");
 		}
 	}
 
+	//Travels to fTraveled if doors are closed, power is on and the floor is valid
 	void goToFloor(int fTraveled) {
-		if (doorsOpen == false && powerOn == true && floor+fTraveled <= topFloor && fTraveled>0) {
+		if (!doorsOpen&& powerOn && floor+fTraveled < topFloor && fTraveled>0) {
 			floor = fTraveled;
 		}
 	}
 
+	//Adds people if doors are open and produces a valid number
 	void addPeople(int morePeople) {
-		if (doorsOpen == true && people+morePeople <= maxOccupants && morePeople >= 0) {
+		if (doorsOpen&& people+morePeople <= maxOccupants && morePeople >= 0) {
 			people+= morePeople; 
 		}
 	}
 
+	//Removes people if doors are open and produces a valid number
 	void removePeople(int lessPeople) {
-		if (doorsOpen == true && people-lessPeople >= 0 && lessPeople >= 0) {
+		if (doorsOpen && people-lessPeople >= 0 && lessPeople >= 0) {
 			people-= lessPeople; 
 		}
 	}
