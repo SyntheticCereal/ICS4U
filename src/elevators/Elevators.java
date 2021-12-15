@@ -28,7 +28,7 @@ public class Elevators {
 	//
 	void up() {
 		if (!doorsOpen && powerOn && floor++<= topFloor) {} 
-		}
+	}
 
 	//Goes down if doors are closed, power is on and is greater than 0
 	void down() {

@@ -5,12 +5,15 @@ public class RandomWord {
 		String str = "";
 		String vowel = "AEIOUY";
 		double numVowel = (Math.random()*2);
+		int tempPlace =-1;
 
 
 		for (int i = 0; i<=5; i++) {
 			char letter = (char)((Math.random()*26)+65);
-			if (letter == 65 || letter == 69 || letter == 73 || letter == 79 || letter == 85 || letter == 89) {
-				letter = (char)((Math.random()*26)+65);
+			while (letter == 65 || letter == 69 || letter == 73 || letter == 79 || letter == 85 || letter == 89) {
+				if (letter == 65 || letter == 69 || letter == 73 || letter == 79 || letter == 85 || letter == 89) {
+					letter = (char)((Math.random()*26)+65);
+				}
 			}
 			str = str+letter;
 		}
@@ -18,6 +21,14 @@ public class RandomWord {
 		for (int i = 0; i<=(int)(numVowel); i++) {
 			int placeVowel = (int)(Math.random()*6);
 			int randVowel = (int)(Math.random()*5);
+
+			while (tempPlace == placeVowel) {
+				if (tempPlace == placeVowel) {
+					placeVowel = (int)(Math.random()*6);
+				}
+			}
+
+			tempPlace = placeVowel;
 
 			StringBuffer sbuff = new StringBuffer(str);
 			sbuff.setCharAt(placeVowel, vowel.charAt(randVowel));
