@@ -4,7 +4,7 @@ public class StringTesting {
 	public static void main(String[] args) {
 		String str = "";
 		String vowel = "AEIOUY";
-		double numVowel = (Math.random()+1);
+		double numVowel = (Math.random()*2);
 
 
 		for (int i = 0; i<=5; i++) {
@@ -14,12 +14,19 @@ public class StringTesting {
 			}
 			str = str+letter;
 		}
-		
+
 		for (int i = 0; i<=(int)(numVowel); i++) {
-			int placeVowel; 
+			int placeVowel = (int)(Math.random()*6);
+			int randVowel = (int)(Math.random()*5);
+
+			StringBuffer sbuff = new StringBuffer(str);
+			sbuff.setCharAt(placeVowel, vowel.charAt(randVowel));
+			str = sbuff.toString();
+
 		}
-		
-		
+
 		System.out.println(str);
+
+
 	}
 }
