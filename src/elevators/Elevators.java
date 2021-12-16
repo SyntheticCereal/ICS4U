@@ -23,16 +23,37 @@ public class Elevators {
 			System.out.println("The state of the power has changed");
 			powerOn = newState;
 		}
+		System.out.println(" ");
 	}
 
 	//
 	void up() {
 		if (!doorsOpen && powerOn && floor++<= topFloor) {} 
+		if (doorsOpen) {
+			System.out.println("Error! Doors are open");
+		}
+		if (!powerOn) {
+			System.out.println("Error! Power is not on!");
+		}
+		if (floor+1 > topFloor) {
+			System.out.println("Error! That floor is out of bounds!");
+		}
+		System.out.println(" ");
 	}
 
 	//Goes down if doors are closed, power is on and is greater than 0
 	void down() {
-		if (!doorsOpen && powerOn && floor-- >= 0) {} 
+		if (!doorsOpen && powerOn && floor-- > 0) {} 
+		if (doorsOpen) {
+			System.out.println("Error! Doors are open");
+		}
+		if (!powerOn) {
+			System.out.println("Error! Power is not on!");
+		}
+		if (floor+1 <= 0) {
+			System.out.println("Error! That floor is out of bounds!");
+		}
+		System.out.println(" ");
 	}
 
 	//Opens door if power is on
@@ -42,6 +63,7 @@ public class Elevators {
 		} else {
 			System.out.println("Error! Power is not on!");
 		}
+		System.out.println(" ");
 	}
 
 	//Closes door if power is on
@@ -51,20 +73,41 @@ public class Elevators {
 		}else {
 			System.out.println("Error! Power is not on!");
 		}
+		System.out.println(" ");
 	}
 
 	//Travels to fTraveled if doors are closed, power is on and the floor is valid
 	void goToFloor(int fTraveled) {
-		if (!doorsOpen&& powerOn && floor+fTraveled < topFloor && fTraveled>0) {
+		if (!doorsOpen&& powerOn && fTraveled <= topFloor && fTraveled>0) {
 			floor = fTraveled;
 		}
+		if (!doorsOpen) {
+			System.out.println("Error! Doors are closed");
+		}
+		if (!powerOn) {
+			System.out.println("Error! Power is not on!");
+		}
+		if (floor+fTraveled > topFloor || fTraveled<=0) {
+			System.out.println("Error! That floor is invalid!");
+		}
+		System.out.println(" ");
 	}
 
 	//Adds people if doors are open and produces a valid number
 	void addPeople(int morePeople) {
 		if (doorsOpen&& people+morePeople <= maxOccupants && morePeople >= 0) {
 			people+= morePeople; 
+		}	
+		if (!doorsOpen) {
+			System.out.println("Error! Doors are closed");
 		}
+		if (people+morePeople > maxOccupants) {
+			System.out.println("Error! That exceeds the maximum capacity of " + maxOccupants);
+		}
+		if (morePeople<0) {
+			System.out.println("Error! That is an invalid amount of people");
+		}
+		System.out.println(" ");
 	}
 
 	//Removes people if doors are open and produces a valid number
@@ -72,13 +115,23 @@ public class Elevators {
 		if (doorsOpen && people-lessPeople >= 0 && lessPeople >= 0) {
 			people-= lessPeople; 
 		}
+		if (!doorsOpen) {
+			System.out.println("Error! Doors are closed");
+		}
+		if (people-lessPeople <0) {
+			System.out.println("Error! You are removing too many people");
+		}
+		if (lessPeople<0) {
+			System.out.println("Error! That is an invalid amount of people");
+		}
+		System.out.println(" ");
 	}
 
 
 	@Override
 	public String toString() {
-		String s = " Floor=" + floor + ", people=" + people + ", doors are " + (doorsOpen ? "Open" : "Closed");
-		s = "Building power is " + (powerOn ? "ON" : "OFF") + s;
+		String s = " Current Floor:" + floor + ", Current Passangers:" + people + ", The Doors are" + (doorsOpen ? "Open" : "Closed");
+		s = "The Building's Power is " + (powerOn ? "ON" : "OFF") + s;
 		return s;
 	}
 }
