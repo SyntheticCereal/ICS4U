@@ -1,5 +1,13 @@
 package elevators;
 
+/*
+ * Chris S
+ * ICS4U1
+ * 16/12/21
+ * Elevator object
+ * Creates methods to do certain things i.e going up and down
+ */
+
 public class Elevators {
 	final static String manufacturer = "Otis";
 	final static int topFloor = 10;
@@ -23,7 +31,6 @@ public class Elevators {
 			System.out.println("The state of the power has changed");
 			powerOn = newState;
 		}
-		System.out.println(" ");
 	}
 
 	//
@@ -35,10 +42,9 @@ public class Elevators {
 		if (!powerOn) {
 			System.out.println("Error! Power is not on!");
 		}
-		if (floor+1 > topFloor) {
+		if (floor > topFloor) {
 			System.out.println("Error! That floor is out of bounds!");
 		}
-		System.out.println(" ");
 	}
 
 	//Goes down if doors are closed, power is on and is greater than 0
@@ -53,7 +59,6 @@ public class Elevators {
 		if (floor+1 <= 0) {
 			System.out.println("Error! That floor is out of bounds!");
 		}
-		System.out.println(" ");
 	}
 
 	//Opens door if power is on
@@ -63,7 +68,6 @@ public class Elevators {
 		} else {
 			System.out.println("Error! Power is not on!");
 		}
-		System.out.println(" ");
 	}
 
 	//Closes door if power is on
@@ -73,7 +77,6 @@ public class Elevators {
 		}else {
 			System.out.println("Error! Power is not on!");
 		}
-		System.out.println(" ");
 	}
 
 	//Travels to fTraveled if doors are closed, power is on and the floor is valid
@@ -90,7 +93,7 @@ public class Elevators {
 		if (floor+fTraveled > topFloor || fTraveled<=0) {
 			System.out.println("Error! That floor is invalid!");
 		}
-		System.out.println(" ");
+		System.out.println("");
 	}
 
 	//Adds people if doors are open and produces a valid number
@@ -107,7 +110,7 @@ public class Elevators {
 		if (morePeople<0) {
 			System.out.println("Error! That is an invalid amount of people");
 		}
-		System.out.println(" ");
+		System.out.println("");
 	}
 
 	//Removes people if doors are open and produces a valid number
@@ -124,13 +127,13 @@ public class Elevators {
 		if (lessPeople<0) {
 			System.out.println("Error! That is an invalid amount of people");
 		}
-		System.out.println(" ");
+		System.out.println("");
 	}
 
 
 	@Override
 	public String toString() {
-		String s = " Current Floor:" + floor + ", Current Passangers:" + people + ", The Doors are" + (doorsOpen ? "Open" : "Closed");
+		String s = " Current Floor:" + floor + ", Current Passangers:" + people + ", The Doors are " + (doorsOpen ? "Open" : "Closed");
 		s = "The Building's Power is " + (powerOn ? "ON" : "OFF") + s;
 		return s;
 	}

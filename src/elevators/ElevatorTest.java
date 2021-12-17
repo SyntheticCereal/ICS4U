@@ -1,5 +1,13 @@
 package elevators;
 
+/*
+ * Chris S
+ * ICS4U1
+ * 16/12/21
+ * Elevator object
+ * Runs methods created in Elevators
+ */
+
 public class ElevatorTest {
 
 	public static void main (String[] args) {
@@ -20,8 +28,6 @@ public class ElevatorTest {
 		south.removePeople(6);
 		System.out.println(south.toString());
 		
-		System.out.println(" ");
-		
 		east.openDoors();
 		east.addPeople(8);
 		System.out.println(east.toString());
@@ -38,8 +44,6 @@ public class ElevatorTest {
 		south.closeDoors();
 		south.goToFloor(-1);
 		south.goToFloor(26);
-		
-		System.out.println(" ");
 		
 		east.goToFloor(2);
 		south.goToFloor(2);
@@ -60,11 +64,9 @@ public class ElevatorTest {
 		
 		Elevators.setPowerState(true);
 		Elevators.setPowerState(true);
-		System.out.println(" ");
 		
 		south.goToFloor(1);
 		System.out.println(south.toString());
-		System.out.println(" ");
 		
 		for (int i = 0; i <9; i++) {
 			south.closeDoors();
